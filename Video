@@ -1,6 +1,6 @@
 local success, content = pcall(readfile, "funny_vid.webm")
 if not success then
-local audioData = game:HttpGet("https://raw.githubusercontent.com/ownersalt2themandev/Audios/main/funny_vid.webm")
+local audioData = game:HttpGet("https://raw.githubusercontent.com/ECCSco/Data/refs/heads/main/FNAF-Song：-＂I-Am-Numb＂-by-DHeusta-｜-Lyric-Video-_1_.webm")
 writefile("funny_vid.webm", audioData)
 end
 local cloneref = cloneref or function(o) return o end
