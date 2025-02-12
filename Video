@@ -1,0 +1,25 @@
+local success, content = pcall(readfile, "funny_vid.webm")
+if not success then
+local audioData = game:HttpGet("https://raw.githubusercontent.com/ownersalt2themandev/Audios/main/funny_vid.webm")
+writefile("funny_vid.webm", audioData)
+end
+local cloneref = cloneref or function(o) return o end
+local coregui = cloneref(game:GetService("CoreGui"))
+
+local vid = Instance.new("ScreenGui",coregui)
+vid.Name = "videoGui"
+vid.Enabled = true
+vid.IgnoreGuiInset = true
+vid.ResetOnSpawn = false
+vid.DisplayOrder = 0
+
+local actual = Instance.new("VideoFrame",vid)
+actual.Name = "video"
+actual.BackgroundTransparency = 1
+actual.Size = UDim2.new(1,0,1,0)
+actual.Visible = true
+actual.Position = UDim2.new(0,0,0,0)
+actual.Playing = true
+actual.Looped = true
+
+actual.Video = getcustomasset("funny_vid.webm")
