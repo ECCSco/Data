@@ -3460,38 +3460,100 @@ newScript.ScriptTitle.Text = v.title
 newScript.ScriptGame.Text = v.game.name
 newScript.Parent = Scripts
 end
-if v.game.name == "Universal Script 📌" then
+
 spawn(function()
-local success, response = pcall(function()
-return
-game:HttpGet("https://scriptblox.com/"..v.image)
-end)
+    local base_url = "https://scriptblox.com"
+    local fallback_image = "rbxassetid://112709426417490"
+    
+    -- 1. Выбор источника изображения с логированием
+    local sources = {
+        v.image,
+        v.game and v.game.imageUrl
+    }
+    
+    local image_url = nil
+    for i, source in ipairs(sources) do
+        if source and source ~= "" and source ~= "/images/no-script.webp" then
+            image_url = source
+            print("[DEBUG] Selected image source:", source)
+            break
+        end
+    end
 
-if success then
-Url = "https://scriptblox.com/"..v.image
-DataMatch = Url:match("^.+(%..+)$")
-local timestamp = tostring(os.time())
-local newFileName = "Cache_"..timestamp..DataMatch
-writefile("Dynamic_Island/CacheImages/"..newFileName, response)
-newScript.PreviewImage.Image = getcustomasset("Dynamic_Island/CacheImages/"..newFileName)end
-end)
+    -- 2. Обработка относительных путей
+    if image_url then
+        if image_url:sub(1, 1) == "/" then
+            image_url = base_url .. image_url
+            print("[DEBUG] Converted relative path:", image_url)
+        end
+    else
+        print("[WARN] No valid image sources found")
+        newScript.PreviewImage.Image = fallback_image
+        return
+    end
 
-else
-spawn(function()
-local success, response = pcall(function()
-return game:HttpGet(v.game.imageUrl)
-end)
+    local max_attempts = 3
+    local response = nil
+    
+    for attempt = 1, max_attempts do
+        local success, err = pcall(function()
+            response = game:HttpGetAsync(image_url, {Timeout = 15})
+        end)
+        
+        if success then
+            print("[DEBUG] Successfully downloaded", #response, "bytes")
+            break
+        else
+            print("[ERROR] Download attempt", attempt, "failed:", err)
+            if attempt < max_attempts then
+                task.wait(2)
+            end
+        end
+    end
 
-if success then
-Url = v.game.imageUrl
-DataMatch = Url:match("^.+(%..+)$")
-local timestamp = tostring(os.time())
-local newFileName = "Cache_"..timestamp..DataMatch
-writefile("Dynamic_Island/CacheImages/"..newFileName, response)
-newScript.PreviewImage.Image = getcustomasset("Dynamic_Island/CacheImages/"..newFileName)
-end
+    if not response then
+        print("[ERROR] All download attempts failed for:", image_url)
+        newScript.PreviewImage.Image = fallback_image
+        return
+    end
+
+    -- 5. Определение формата с расширенной проверкой
+    local ext_map = {
+        ["\x89PNG"] = ".png",
+        ["\xFF\xD8"] = ".jpg",
+        ["GIF8"] = ".gif",
+        ["RIFF"] = ".webp",
+        ["%<!"] = ".svg", -- SVG fallback
+        [""] = ".bin" -- Unknown type
+    }
+
+    local header = response:sub(1, 4)
+    local ext = ext_map[header] or ".png"
+    print("[DEBUG] Detected file type:", ext)
+
+    -- 6. Генерация уникального имени файла
+    local filename = string.format(
+        "%d_%d%s",
+        os.time(),
+        math.random(10000, 99999),
+        ext
+    )
+    local cache_path = "Dynamic_Island/CacheImages/"..filename
+    print("[DEBUG] Cache path:", cache_path)
+
+    -- 7. Сохранение с обработкой ошибок
+    local write_ok = pcall(function()
+        writefile(cache_path, response)
+    end)
+    
+    if write_ok then
+        print("[DEBUG] File saved successfully")
+        newScript.PreviewImage.Image = getcustomasset(cache_path)
+    else
+        print("[ERROR] Failed to save file:", cache_path)
+        newScript.PreviewImage.Image = fallback_image
+    end
 end)
-end
 
 if v.key == true then
 newScript.ButtonsFrame.KeySystem.Visible = true
