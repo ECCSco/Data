@@ -140,12 +140,6 @@ Light = game:GetService("Lighting")
 players = game:GetService("Players")
 plr = players.LocalPlayer
 mouse = plr:GetMouse()
-AppsScrollingFrame = Instance.new("ScrollingFrame")
-AppsBackgroundImage = Instance.new("ImageLabel")
-InstallerFrame = Instance.new("ImageButton")
-InstallerScrollingFrame = Instance.new("ScrollingFrame")
-CloseInstaller = Instance.new("ImageButton")
-InstallerSearchBox = Instance.new("TextBox")
 MainSettingsFrame = Instance.new("Frame")
 OwnerFrame = Instance.new("Frame")
 OwnerIcon = Instance.new("ImageLabel")
@@ -1273,27 +1267,6 @@ RejoinButton.TextSize = 20
 RejoinButtonUICorner.CornerRadius = UDim.new(0, 9)
 RejoinButtonUICorner.Parent = RejoinButton
 
-AppsBackgroundImage.Name = "AppsBackgroundImage"
-AppsBackgroundImage.Parent = MainHomeFrame
-AppsBackgroundImage.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-AppsBackgroundImage.AnchorPoint = Vector2.new(0.5, 0)
-AppsBackgroundImage.Image = "rbxassetid://112709426417490"
-AppsBackgroundImage.Position = UDim2.new(0.5, 0, 0, 0)
-AppsBackgroundImage.Size = UDim2.new(0, 551, 0, 285)
-AppsBackgroundImage.BorderSizePixel = 0 
-
-AppsScrollingFrame.Name = "AppsScrollingFrame"
-AppsScrollingFrame.Parent = MainHomeFrame
-AppsScrollingFrame.Active = true
-AppsScrollingFrame.BorderSizePixel = 0 
-AppsScrollingFrame.AnchorPoint = Vector2.new(0.5, 0)
-AppsScrollingFrame.Position = UDim2.new(0.5, 0, 0, 0)
-AppsScrollingFrame.Size = UDim2.new(0, 551, 0, 285)
-AppsScrollingFrame.Transparency = 0.3
-AppsScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-AppsScrollingFrame.ScrollBarThickness = 0
-AppsScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-
 MainSettingsFrame.Name = "MainSettingsFrame"
 MainSettingsFrame.Parent = TabsParent
 MainSettingsFrame.AnchorPoint = Vector2.new(0.5, 0)
@@ -2034,25 +2007,13 @@ end
 end
 end
 end
- 
-if not isfolder("Dynamic_Island/Background") then
-createfolders("Dynamic_Island/Background")
-end
 
 if not isfolder("Dynamic_Island") then
 createfolders("Dynamic_Island")
 end
 
-if not isfolder("Dynamic_Island/Apps") then
-createfolders("Dynamic_Island/Apps")
-end
-
 if not isfolder("Dynamic_Island/CacheImages") then
 createfolders("Dynamic_Island/CacheImages")
-end
-
-if not isfolder("Dynamic_Island/AppsData") then
-createfolders("Dynamic_Island/AppsData")
 end
 
 if not isfile("Dynamic_Island/History.ECCS") then
@@ -2149,330 +2110,6 @@ end
 end
 end)
 
-spawn(function()
-while task.wait() do
-if InstallerFrame.Size ~= UDim2.new(0, 551, 0, 285) then
-CloseInstaller.Visible = false
-InstallerSearchBox.Visible = false
-InstallerScrollingFrame.Visible = false
-end
-if InstallerFrame.Size == UDim2.new(0, 551, 0, 285) then
-CloseInstaller.Visible = true
-InstallerSearchBox.Visible = true
-InstallerScrollingFrame.Visible = true
-end
-if InstallerFrame.Size == UDim2.new(0, 0, 0, 0) then
-InstallerFrame.Visible = false
-else
-InstallerFrame.Visible = true
-end
-end
-end)
-
-InstallerFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-InstallerFrame.BorderSizePixel = 1
-InstallerFrame.Parent = MainHomeFrame
-InstallerFrame.BorderSizePixel = 0  
-InstallerFrame.AnchorPoint = Vector2.new(0.5, 0)
-InstallerFrame.Position = UDim2.new(0.5, 0, 0, 0)
-InstallerFrame.Size = UDim2.new(0, 0, 0, 0)
-InstallerFrame.AutoButtonColor = false
-
-CloseInstaller.Name = "CloseInstaller"
-CloseInstaller.Parent = InstallerFrame
-CloseInstaller.Size = UDim2.new(0, 20, 0, 20)
-CloseInstaller.AutoButtonColor = false
-CloseInstaller.Image = "rbxassetid://126487052147977"
-CloseInstaller.BackgroundTransparency = 1
-
-InstallerSearchBox.Name = "InstallerSearchBox"
-InstallerSearchBox.Parent = InstallerFrame
-InstallerSearchBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-InstallerSearchBox.BorderSizePixel = 0
-InstallerSearchBox.AnchorPoint = Vector2.new(1, 0)
-InstallerSearchBox.Position = UDim2.new(1, 0, 0, 0)
-InstallerSearchBox.Size = UDim2.new(0, 530, 0, 20)
-InstallerSearchBox.ClearTextOnFocus = false
-InstallerSearchBox.Font = HeadFont
-InstallerSearchBox.PlaceholderText = "Search apps on dyna"
-InstallerSearchBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-InstallerSearchBox.Text = ""
-InstallerSearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-InstallerSearchBox.TextSize = 20
-InstallerSearchBox.ZIndex = 5
-InstallerSearchBox.TextXAlignment = Enum.TextXAlignment.Center
-InstallerSearchBox.TextYAlignment = Enum.TextYAlignment.Center
-
-InstallerScrollingFrame.Size = UDim2.new(0, 551, 0, 265)
-InstallerScrollingFrame.AnchorPoint = Vector2.new(0.5, 1)
-InstallerScrollingFrame.Position = UDim2.new(0.5, 0, 1, 0)
-InstallerScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-InstallerScrollingFrame.ScrollBarThickness = 0
-InstallerScrollingFrame.Transparency = 1
-InstallerScrollingFrame.Parent = InstallerFrame
-InstallerScrollingFrame.BorderSizePixel = 0 
-
-CloseInstaller.MouseButton1Click:Connect(function()
-InstallerFrame:TweenSize(UDim2.new(0, 0, 0, 0),"InOut","Sine",0.2)
-end)
-
-LoadingApps = Instance.new("TextLabel")
-LoadingApps.Name = "LoadingApps"
-LoadingApps.Parent = MainHomeFrame
-LoadingApps.BackgroundTransparency = 1
-LoadingApps.AnchorPoint = Vector2.new(0.5, 0)
-LoadingApps.Position = UDim2.new(0.5, 0, 0, 0)
-LoadingApps.Size = UDim2.new(0, 551, 0, 285)
-LoadingApps.Font = HeadFont
-LoadingApps.Text = "Please be patient while the applications are loading"
-LoadingApps.TextColor3 = Color3.fromRGB(255, 255, 255)
-LoadingApps.TextSize = 50
-LoadingApps.TextWrapped = true
-
-local function WaitForGameToStabilize()
-while not game:IsLoaded() do
-task.wait(0.1)
-end
-
-local startTime = tick()
-while tick() - startTime < 5 do
-task.wait(0.1)
-end
-
-local RunService = game:GetService("RunService")
-local fpsThreshold = 30  
-while true do
-local fps = 1 / RunService.RenderStepped:Wait()
-if fps >= fpsThreshold then
-break
-end
-task.wait(0.1)
-end
-print("The game has stabilized. Starting the file download...")
-end
-
-local function UpdateApps()
-AppsScrollingFrame:ClearAllChildren()
-
-local UIGridLayoutApps = Instance.new("UIGridLayout")
-UIGridLayoutApps.Parent = AppsScrollingFrame
-UIGridLayoutApps.HorizontalAlignment = Enum.HorizontalAlignment.Left
-UIGridLayoutApps.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayoutApps.VerticalAlignment = Enum.VerticalAlignment.Top
-UIGridLayoutApps.CellPadding = UDim2.new(0, 8.9, 0, 15)
-UIGridLayoutApps.CellSize = UDim2.new(0, 60, 0, 60)
-
-local UIPaddingApps = Instance.new("UIPadding")
-UIPaddingApps.Parent = AppsScrollingFrame
-UIPaddingApps.PaddingBottom = UDim.new(0, 15)
-UIPaddingApps.PaddingLeft = UDim.new(0, 7)
-UIPaddingApps.PaddingRight = UDim.new(0, 0)
-UIPaddingApps.PaddingTop = UDim.new(0, 5)
-
-local AddAppButton = Instance.new("ImageButton")
-AddAppButton.Parent = AppsScrollingFrame
-AddAppButton.BackgroundTransparency = 1
-AddAppButton.AutoButtonColor = false
-AddAppButton.Image = "rbxassetid://121620095065476"
-
-local InstallerName = Instance.new("TextLabel")
-InstallerName.Name = "InstallerName"
-InstallerName.Parent = AddAppButton
-InstallerName.BackgroundTransparency = 1
-InstallerName.Position = UDim2.new(0.5, 0, 1, 0)
-InstallerName.AnchorPoint = Vector2.new(0.5, 0)
-InstallerName.Size = UDim2.new(0, 60, 0, 15)
-InstallerName.Font = Enum.Font.SourceSans
-InstallerName.Text = "Dyna"
-InstallerName.TextColor3 = Color3.fromRGB(255, 255, 255)
-InstallerName.TextSize = 15
-InstallerName.TextXAlignment = Enum.TextXAlignment.Center
-InstallerName.TextYAlignment = Enum.TextYAlignment.Bottom
-
-AddAppButton.MouseButton1Click:Connect(function()
-InstallerFrame:TweenSize(UDim2.new(0, 551, 0, 285), "InOut", "Sine", 0.2)
-end)
-
-if isfolder("Dynamic_Island/Apps") then
-local files = listfiles("Dynamic_Island/Apps/")
-local loaded = {}
-local function loadFiles()
-for _, file in ipairs(files) do
-spawn(function()
-local success, err = pcall(function()
-print("Attempting to load a file: "..file)
-local chunk = loadstring(readfile(file))
-if chunk then
-chunk()
-loaded[file] = true
-print("The file has been successfully loaded: "..file)
-else
-warn("Error when loading a file "..file..": chunk is nil")
-end
-end)
-if not success then
-warn("Error when loading a file "..file..": "..err)
-end
-end)
-end
-end
-local function allFilesLoaded()
-for _, file in ipairs(files) do
-if not loaded[file] then
-print("Waiting for the file to be loaded: "..file)
-return false
-end
-end
-return true
-end
-loadFiles()
-spawn(function()
-while not allFilesLoaded() do
-task.wait(0.5)
-end
-print("All files have been successfully loaded. Continuing the operation to restore applications to their original appearance...")
-LoadingApps:Destroy()
-for _, loadedapps in pairs(AppsScrollingFrame:GetChildren()) do
-if loadedapps:IsA("GuiObject") then
-local AppsCorner = Instance.new("UICorner")
-AppsCorner.CornerRadius = UDim.new(0, 20)
-AppsCorner.Parent = loadedapps
-end
-end
-end)
-end
-end
-
-spawn(function()
-WaitForGameToStabilize()
-UpdateApps()
-end)
-
-spawn(function()
-local response = game:HttpGet("https://raw.githubusercontent.com/ECCSco/Dynamic-Installer/refs/heads/main/.Installer")
-local function parseData(data)
-for line in data:gmatch("[^\n]+") do
-local id, name, url = line:match("^(%d+)~(.-)~(.+)$")
-if id and name and url then
-table.insert(DynaData, {id = id, name = name, url = url})
-end
-end
-end
-
-parseData(response)
-
-local function createAppFrame(app)
-local AppsInstallerFrame = Instance.new("Frame")
-AppsInstallerFrame.Parent = InstallerScrollingFrame
-AppsInstallerFrame.BorderSizePixel = 0 
-AppsInstallerFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-
-local AppImage = Instance.new("ImageLabel")
-AppImage.Image = "rbxassetid://"..app.id
-AppImage.Parent = AppsInstallerFrame
-AppImage.BorderSizePixel = 0 
-AppImage.Size = UDim2.new(0, 70, 0, 70)
-AppImage.Position = UDim2.new(0, 5, 0, 5)
-AppImage.BackgroundTransparency = 1
-
-local AppImageUICorner = Instance.new("UICorner")
-AppImageUICorner.CornerRadius = UDim.new(0, 20)
-AppImageUICorner.Parent = AppImage
-   
-local DynaLine = Instance.new("Frame")
-DynaLine.Parent = AppsInstallerFrame
-DynaLine.Size = UDim2.new(1, 0, 0, 5)
-DynaLine.Position = UDim2.new(0.5, 0, 1, 0)
-DynaLine.AnchorPoint = Vector2.new(0.5, 0)
-DynaLine.BorderSizePixel = 0
-DynaLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-
-local DynaLineUIGradient = Instance.new("UIGradient")
-DynaLineUIGradient.Color = ColorSequence.new{
-ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
-}
-DynaLineUIGradient.Rotation = 85
-DynaLineUIGradient.Parent = DynaLine
-
-local AppName = Instance.new("TextLabel")
-AppName.Size = UDim2.new(0, 255, 0, 70)
-AppName.Text = app.name
-AppName.BackgroundTransparency = 1
-AppName.Parent = AppsInstallerFrame
-AppName.Position = UDim2.new(0, 80, 0, 5)
-AppName.Font = HeadFont
-AppName.TextSize = 30
-AppName.TextColor3 = Color3.fromRGB(255, 255, 255)
-AppName.TextXAlignment = Enum.TextXAlignment.Left
-AppName.TextYAlignment = Enum.TextYAlignment.Center
-
-local InstallAppButton = Instance.new("TextButton")
-InstallAppButton.Size = UDim2.new(0, 210, 0, 40)
-InstallAppButton.Parent = AppsInstallerFrame
-InstallAppButton.Text = "Download"
-InstallAppButton.AnchorPoint = Vector2.new(0.5, 0.5)
-InstallAppButton.Font = HeadFont
-InstallAppButton.Position = UDim2.new(0.8, 0, 0.5, 0)
-InstallAppButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-InstallAppButton.TextSize = 30
-InstallAppButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-InstallAppButton.AutoButtonColor = false
-
-local InstallAppButtonUICorner = Instance.new("UICorner")
-InstallAppButtonUICorner.CornerRadius = UDim.new(0, 9)
-InstallAppButtonUICorner.Parent = InstallAppButton
-
-if isfile("Dynamic_Island/Apps/"..app.name..".ECCS") then 
-InstallAppButton.Text = "Update" 
-end
-
-InstallAppButton.MouseButton1Click:Connect(function()
-if InstallAppButton.Text == "Download" then
-InstallAppButton.Text = "Wait..."
-writefile("Dynamic_Island/Apps/"..app.name..".ECCS", ""..game:HttpGet(app.url:match('"(.-)"')))
-InstallAppButton.Text = "Update"
-else
-if InstallAppButton.Text == "Update" then
-InstallAppButton.Text = "Wait..."
-writefile("Dynamic_Island/Apps/"..app.name..".ECCS", ""..game:HttpGet(app.url:match('"(.-)"')))
-InstallAppButton.Text = "Updated"
-wait(1)
-InstallAppButton.Text = "Update"
-end
-end
-UpdateApps()
-end)
-end
-
-local function Installer()
-InstallerScrollingFrame:ClearAllChildren()
-local InstallerScrollingFrameUIGridLayout = Instance.new("UIGridLayout")
-InstallerScrollingFrameUIGridLayout.Name = "InstallerScrollingFrameUIGridLayout"
-InstallerScrollingFrameUIGridLayout.Parent = InstallerScrollingFrame
-InstallerScrollingFrameUIGridLayout.CellPadding = UDim2.new(0, 0, 0, 5)
-InstallerScrollingFrameUIGridLayout.CellSize = UDim2.new(0, 551, 0, 80)
-InstallerScrollingFrameUIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-InstallerScrollingFrameUIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-InstallerScrollingFrameUIGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-
-if InstallerSearchBox.Text:lower() == "" then
-for _, app in ipairs(DynaData) do
-createAppFrame(app)
-end
-else
-for _, app in ipairs(DynaData) do
-if app.name:lower():find(InstallerSearchBox.Text:lower()) then
-createAppFrame(app)
-end
-end
-end
-end
-
-Installer()
-InstallerSearchBox:GetPropertyChangedSignal("Text"):Connect(Installer)
-end)
-
 local function updateFavourites()
 FavouritesScrollingFrame:ClearAllChildren()
 if SearchBoxFavourites.Text:lower() == "" then
@@ -2530,7 +2167,7 @@ SavedPostLineUIGradient.Parent = SavedPostLine
 if gameName ~= "Universal Script 📌" then
 SavedScriptImage.Image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..imageId.."&fmt=png&wd=420&ht=420"
 else
-SavedScriptImage.Image = AppsBackgroundImage.Image
+
 end
  
 SavedScriptImageShadow = Instance.new("Frame")
@@ -2798,7 +2435,7 @@ SavedPostLineUIGradient.Parent = SavedPostLine
 if gameName ~= "Universal Script 📌" then
 SavedScriptImage.Image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..imageId.."&fmt=png&wd=420&ht=420"
 else
-SavedScriptImage.Image = AppsBackgroundImage.Image
+
 end
  
 SavedScriptImageShadow = Instance.new("Frame")
@@ -3266,32 +2903,6 @@ isHolding = false
 end
 end
 
-spawn(function()
-if not isfile("Dynamic_Island/Background/ImageBackground.png") then
-local success, response = pcall(function()
-return
-game:HttpGet("https://i.ibb.co/0RmRCNYN/64000-2-1427056985.png")
-end)
- 
-if success then
-Url = "https://i.ibb.co/0RmRCNYN/64000-2-1427056985.png"
-DataMatch = Url:match("^.+(%..+)$")
-MatchedUrl = "ImageBackground"..DataMatch
- 
-writefile("Dynamic_Island/Background/ImageBackground.png", response)
- 
-AppsBackgroundImage.Image = getcustomasset("Dynamic_Island/Background/ImageBackground.png")
- 
-else
-AppsBackgroundImage.Image = "rbxassetid://112709426417490"
-end
- 
-else
-AppsBackgroundImage.Image = getcustomasset("Dynamic_Island/Background/ImageBackground.png")
-end
-updateFavourites()
-end)
-
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
 UserInputService.InputBegan:Connect(onKeyPress)
@@ -3300,16 +2911,12 @@ UserInputService.InputEnded:Connect(onKeyRelease)
 page = 1
 gquery = ""
 
-InstallerScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
-AppsScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 FavouritesScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 MainFrame.InfoBox.Comments.AutomaticCanvasSize = Enum.AutomaticSize.Y
 ScriptInfoScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 ExecutorScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 HistoryScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 MainFrame.ScriptListFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
-InstallerScrollingFrame.ScrollBarImageTransparency = 1
-AppsScrollingFrame.ScrollBarImageTransparency = 1
 FavouritesScrollingFrame.ScrollBarImageTransparency = 1
 ExecutorScrollingFrame.ScrollBarImageTransparency = 1
 MainFrame.ScriptListFrame.ScrollBarImageTransparency = 1
@@ -3462,96 +3069,21 @@ newScript.Parent = Scripts
 end
 
 spawn(function()
-    local base_url = "https://scriptblox.com"
-    local fallback_image = "rbxassetid://112709426417490"
+    base_url = "https://scriptblox.com"
+    image_url = v.image or (v.game and v.game.imageUrl)
     
-    -- 1. Выбор источника изображения с логированием
-    local sources = {
-        v.image,
-        v.game and v.game.imageUrl
-    }
-    
-    local image_url = nil
-    for i, source in ipairs(sources) do
-        if source and source ~= "" and source ~= "/images/no-script.webp" then
-            image_url = source
-            print("[DEBUG] Selected image source:", source)
-            break
-        end
-    end
-
-    -- 2. Обработка относительных путей
     if image_url then
-        if image_url:sub(1, 1) == "/" then
-            image_url = base_url .. image_url
-            print("[DEBUG] Converted relative path:", image_url)
+        if image_url:sub(1,1) == "/" then
+            image_url = base_url..image_url
         end
-    else
-        print("[WARN] No valid image sources found")
-        newScript.PreviewImage.Image = fallback_image
-        return
-    end
-
-    local max_attempts = 3
-    local response = nil
-    
-    for attempt = 1, max_attempts do
-        local success, err = pcall(function()
-            response = game:HttpGetAsync(image_url, {Timeout = 15})
-        end)
         
-        if success then
-            print("[DEBUG] Successfully downloaded", #response, "bytes")
-            break
-        else
-            print("[ERROR] Download attempt", attempt, "failed:", err)
-            if attempt < max_attempts then
-                task.wait(2)
-            end
-        end
-    end
-
-    if not response then
-        print("[ERROR] All download attempts failed for:", image_url)
-        newScript.PreviewImage.Image = fallback_image
-        return
-    end
-
-    -- 5. Определение формата с расширенной проверкой
-    local ext_map = {
-        ["\x89PNG"] = ".png",
-        ["\xFF\xD8"] = ".jpg",
-        ["GIF8"] = ".gif",
-        ["RIFF"] = ".webp",
-        ["%<!"] = ".svg", -- SVG fallback
-        [""] = ".bin" -- Unknown type
-    }
-
-    local header = response:sub(1, 4)
-    local ext = ext_map[header] or ".png"
-    print("[DEBUG] Detected file type:", ext)
-
-    -- 6. Генерация уникального имени файла
-    local filename = string.format(
-        "%d_%d%s",
-        os.time(),
-        math.random(10000, 99999),
-        ext
-    )
-    local cache_path = "Dynamic_Island/CacheImages/"..filename
-    print("[DEBUG] Cache path:", cache_path)
-
-    -- 7. Сохранение с обработкой ошибок
-    local write_ok = pcall(function()
+        response = game:HttpGetAsync(image_url)
+        ext = ({["\x89PNG"]=".png",["\xFF\xD8"]=".jpg",["GIF8"]=".gif",["RIFF"]=".webp"})[response:sub(1,4)] or ".png"
+        filename = os.time().."_"..math.random(9999,99999)..ext
+        cache_path = "Dynamic_Island/CacheImages/"..filename
+        
         writefile(cache_path, response)
-    end)
-    
-    if write_ok then
-        print("[DEBUG] File saved successfully")
         newScript.PreviewImage.Image = getcustomasset(cache_path)
-    else
-        print("[ERROR] Failed to save file:", cache_path)
-        newScript.PreviewImage.Image = fallback_image
     end
 end)
 
