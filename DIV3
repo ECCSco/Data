@@ -2017,6 +2017,10 @@ if not isfolder("Dynamic_Island/CacheImages") then
 createfolders("Dynamic_Island/CacheImages")
 end
 
+if not isfolder("Dynamic_Island/Favourites") then
+createfolders("Dynamic_Island/Favourites")
+end
+
 if not isfile("Dynamic_Island/History.ECCS") then
 writefile("Dynamic_Island/History.ECCS", "")
 end
@@ -2025,8 +2029,8 @@ if not isfile("Dynamic_Island/Editor.ECCS") then
 writefile("Dynamic_Island/Editor.ECCS", ExecutorTextBox.Text)
 end
 
-if not isfile("Dynamic_Island/Favourites.ECCS") then
-writefile("Dynamic_Island/Favourites.ECCS", "")
+if not isfile("Dynamic_Island/Favourites/Favourites.ECCS") then
+writefile("Dynamic_Island/Favourites/Favourites.ECCS", "")
 end
 
 if not isfile("Dynamic_Island/GestureControl.ECCS") then
@@ -2052,7 +2056,7 @@ ExecutorTextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
 EditorTextHTMLColor.Visible = true
 end)
 
-File3 = readfile("Dynamic_Island/Favourites.ECCS")
+File3 = readfile("Dynamic_Island/Favourites/Favourites.ECCS")
 
 File4 = readfile("Dynamic_Island/GestureControl.ECCS")
 GestureControlValue.Value = File4
@@ -2165,11 +2169,7 @@ ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
 SavedPostLineUIGradient.Rotation = 85
 SavedPostLineUIGradient.Parent = SavedPostLine
 
-if gameName ~= "Universal Script 📌" then
 SavedScriptImage.Image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..imageId.."&fmt=png&wd=420&ht=420"
-else
-
-end
  
 SavedScriptImageShadow = Instance.new("Frame")
 SavedScriptImageShadow.Name = "SImgShadow"
@@ -2433,11 +2433,7 @@ ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
 SavedPostLineUIGradient.Rotation = 85
 SavedPostLineUIGradient.Parent = SavedPostLine
 
-if gameName ~= "Universal Script 📌" then
 SavedScriptImage.Image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..imageId.."&fmt=png&wd=420&ht=420"
-else
-
-end
  
 SavedScriptImageShadow = Instance.new("Frame")
 SavedScriptImageShadow.Name = "SImgShadow"
@@ -3172,7 +3168,7 @@ end
 end
 if not exists_2 then
 table.insert(Favourites, newSText)
-writefile("Dynamic_Island/Favourites.ECCS", table.concat(Favourites, "Ⓓ "))
+writefile("Dynamic_Island/Favourites/Favourites.ECCS", table.concat(Favourites, "Ⓓ "))
 updateFavourites()
 end
 local newSText = tostring(v.title).."~"..tostring(v.game.gameId).."~"..tostring(v.key).."~"..tostring(v.verified).."~"..tostring(v.owner.username).."~"..tostring("https://scriptblox.com/script/"..v.slug).."~"..tostring(v.game.name).."~"..tostring("https://rawscripts.net/raw/"..v.slug)
