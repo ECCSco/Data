@@ -218,6 +218,7 @@ end
 DI.Name = "DI"
 DI.Parent = game.CoreGui
 DI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+DI.IgnoreGuiInset = true
 game.CoreGui.DI.Enabled = true
 spawn(function()
 while task.wait() do
@@ -238,7 +239,7 @@ DynamicIsland.Name = "DynamicIsland"
 DynamicIsland.Parent = DI
 DynamicIsland.AnchorPoint = Vector2.new(0.5, 0)
 DynamicIsland.Size = UDim2.new(0, 100, 0, 30)
-DynamicIsland.Position = UDim2.new(0.5, 0, -0.06, 0)
+DynamicIsland.Position = UDim2.new(0.5, 0, 0, 0)
 DynamicIsland.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 DynamicIsland.ZIndex = 2
 DynamicIsland.Text = os.date("%H:%M").."  "
@@ -3069,22 +3070,27 @@ newScript.Parent = Scripts
 end
 
 spawn(function()
-    base_url = "https://scriptblox.com"
-    image_url = v.image or (v.game and v.game.imageUrl)
+base_url = "https://scriptblox.com"
+image_url = v.image or (v.game and v.game.imageUrl)
     
-    if image_url then
-        if image_url:sub(1,1) == "/" then
-            image_url = base_url..image_url
-        end
+if image_url then
+hash = string.format("%x", tick()):reverse():sub(1,6)
+clean_id = v._id:gsub("[^%w-]", "") .. "_" .. hash
         
-        response = game:HttpGetAsync(image_url)
-        ext = ({["\x89PNG"]=".png",["\xFF\xD8"]=".jpg",["GIF8"]=".gif",["RIFF"]=".webp"})[response:sub(1,4)] or ".png"
-        filename = os.time().."_"..math.random(9999,99999)..ext
-        cache_path = "Dynamic_Island/CacheImages/"..filename
+if image_url:sub(1,1) == "/" then
+image_url = base_url..image_url
+end
         
-        writefile(cache_path, response)
-        newScript.PreviewImage.Image = getcustomasset(cache_path)
-    end
+cache_path = "Dynamic_Island/CacheImages/"..clean_id
+        
+if not isfile(cache_path) then
+response = game:HttpGetAsync(image_url)
+ext = ({["\x89PNG"]=".png",["\xFF\xD8"]=".jpg",["GIF8"]=".gif",["RIFF"]=".webp"})[response:sub(1,4)] or ".png"
+cache_path = cache_path..ext
+writefile(cache_path, response)
+end 
+newScript.PreviewImage.Image = getcustomasset(cache_path)
+end
 end)
 
 if v.key == true then
