@@ -1569,40 +1569,34 @@ PushFlingTool:Remove()
 end)
 
 spawn(function()
-while wait() do
-plr.Character.Humanoid.Died:Connect(function()
+local function handleDeath()
 TweenService:Create(PushFlingButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
-if FlingValueForPush == false then
-PushFlingTool:Remove()
-else
+
+if FlingValueForPush then
 game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
+end
 PushFlingTool:Remove()
 end
 
+local function setupDeathListener()
+plr.Character.Humanoid.Died:Connect(handleDeath)
+
 local heartbeatConnection
-heartbeatConnection = RunService.Heartbeat:Connect(function() 
-task.wait()
-if plr.Character.Humanoid.Health <= 0 then 
-TweenService:Create(PushFlingButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
-if FlingValueForPush == false then
-PushFlingTool:Remove()
-else
-game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
-PushFlingTool:Remove()
+heartbeatConnection = RunService.Heartbeat:Connect(function()
+if not plr.Character or plr.Character.Humanoid.Health <= 0 then
+heartbeatConnection:Disconnect()
+handleDeath()
 end
-else 
-heartbeatConnection:Disconnect() 
-TweenService:Create(PushFlingButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
-if FlingValueForPush == false then
-PushFlingTool:Remove()
-else
-game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
-PushFlingTool:Remove()
-end
-end 
-end)
 end)
 end
+if plr.Character then
+setupDeathListener()
+end
+
+plr.CharacterAdded:Connect(function(character)
+character:WaitForChild("Humanoid")
+setupDeathListener()
+end)
 end)
 
 RejoinButton.MouseButton1Click:Connect(function()
@@ -1740,25 +1734,22 @@ TweenService:Create(TouchFlingButton, TweenInfo.new(0.5), {BackgroundColor3 = Co
 ToggleVoidProtection(false)
 end
 end
-end)
-
-AntiVoidButton.MouseButton1Click:Connect(function()
-if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(255, 0, 0) then
-TweenService:Create(AntiVoidButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(0, 255, 0)}):Play()
-else
-if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
-TweenService:Create(AntiVoidButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
-end
-end
-end)
-
-spawn(function()
-while task.wait() do
 if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(255, 0, 0) then
 ToggleVoidProtection(false)
 end
 if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
 ToggleVoidProtection(true)
+end
+end)
+
+AntiVoidButton.MouseButton1Click:Connect(function()
+if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(255, 0, 0) then
+TweenService:Create(AntiVoidButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(0, 255, 0)}):Play()
+ToggleVoidProtection(true)
+else
+if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
+TweenService:Create(AntiVoidButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+ToggleVoidProtection(false)
 end
 end
 end)
@@ -1816,12 +1807,18 @@ PushFlingTool:Remove()
 end
 end
 end
+if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(255, 0, 0) then
+ToggleVoidProtection(false)
+end
+if AntiVoidButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
+ToggleVoidProtection(true)
+end
 end)
 
 spawn(function()
 while task.wait() do
-ExecutorTextBox.Size = UDim2.new(0, 551, 0, ExecutorTextBox.TextBounds.Y + 290)
-ScriptInfoTextLabel.Size = UDim2.new(0, 551, 0, ScriptInfoTextLabel.TextBounds.Y + 270)
+ExecutorTextBox.Size = UDim2.new(1, 0, 0, ExecutorTextBox.TextBounds.Y + 290)
+ScriptInfoTextLabel.Size = UDim2.new(1, 0, 0, ScriptInfoTextLabel.TextBounds.Y + 270)
 end
 end)
 
