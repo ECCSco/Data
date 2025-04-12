@@ -240,6 +240,7 @@ DynamicIsland.AnchorPoint = Vector2.new(0, 0.5)
 DynamicIsland.Size = UDim2.new(0, 30, 1, 0)
 DynamicIsland.Position = UDim2.new(0, 0, 0.5, 0)
 DynamicIsland.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DynamicIsland.BackgroundTransparency = 0.7
 DynamicIsland.ZIndex = 2
 DynamicIsland.Text = os.date("%H\n—\n%M")
 DynamicIsland.Font = HeadFont
@@ -327,41 +328,41 @@ SettingsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 SettingsTab.AutoButtonColor = false
 
 TabsFolder.CanvasSize = UDim2.new(0, 0, 0, 0)
-TabsFolder.Transparency = 0
+TabsFolder.Transparency = 1
 TabsFolder.Active = true
 TabsFolder.AnchorPoint = Vector2.new(0.5, 1)
-TabsFolder.Position = UDim2.new(1, 0, 1, -25)
-TabsFolder.Size = UDim2.new(0.5, 0, 1, 0)
+TabsFolder.Size = UDim2.new(1, 0, 1, -25)
+TabsFolder.Position = UDim2.new(0.5, 0, 1, 0)
 TabsFolder.Name = "TabsFolder"
 TabsFolder.Parent = DynamicIsland
 TabsFolder.ScrollBarThickness = 0
 
 TabsParent.Transparency = 1
-TabsParent.AnchorPoint = Vector2.new(0.5, 0)
-TabsParent.Size = UDim2.new(0, 10, 0, 10)
+TabsParent.AnchorPoint = Vector2.new(0.5, 1)
+TabsParent.Size = UDim2.new(1, 0, 1, 0)
 TabsParent.Name = "TabsParent"
 TabsParent.Parent = TabsFolder
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = TabsParent
 MainFrame.AnchorPoint = Vector2.new(0.5, 0)
-MainFrame.Transparency = 1
-MainFrame.Position = UDim2.new(0.5, 0, 0, 0)
-MainFrame.Size = UDim2.new(0, 550, 0, 315)
+MainFrame.Transparency = 0
+MainFrame.Position = UDim2.new(2.5, 0, 0, 0)
+MainFrame.Size = UDim2.new(1, 0, 1, -25)
 
 ExecutorMainFrame.Name = "ExecutorMainFrame"
 ExecutorMainFrame.Parent = TabsParent
-ExecutorMainFrame.AnchorPoint = Vector2.new(0.5, 0)
-ExecutorMainFrame.Transparency = 1
-ExecutorMainFrame.Position = UDim2.new(-82, 0, 0, 0)
-ExecutorMainFrame.Size = UDim2.new(0, 550, 0, 315)
+ExecutorMainFrame.AnchorPoint = Vector2.new(0.5, 1)
+ExecutorMainFrame.Transparency = 0
+ExecutorMainFrame.Position = UDim2.new(1.5, 0, 1, 0)
+ExecutorMainFrame.Size = UDim2.new(1, 0, 1, 0)
 
 ExecutorScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ExecutorScrollingFrame.Transparency = 1
 ExecutorScrollingFrame.Active = true
 ExecutorScrollingFrame.AnchorPoint = Vector2.new(0.5, 0)
 ExecutorScrollingFrame.Position = UDim2.new(0.5, 0, 0, 0)
-ExecutorScrollingFrame.Size = UDim2.new(0, 550, 0, 290)
+ExecutorScrollingFrame.Size = UDim2.new(1, 0, 1, -25)
 ExecutorScrollingFrame.Name = "ExecutorScrollingFrame"
 ExecutorScrollingFrame.Parent = ExecutorMainFrame
 ExecutorScrollingFrame.ScrollBarThickness = 0
@@ -370,7 +371,7 @@ ExecutorTextBox.Name = "ExecutorTextBox"
 ExecutorTextBox.Parent = ExecutorScrollingFrame
 ExecutorTextBox.BackgroundTransparency = 1
 ExecutorTextBox.Position = UDim2.new(0, 0, 0, 0)
-ExecutorTextBox.Size = UDim2.new(0, 551, 0, 290)
+ExecutorTextBox.Size = UDim2.new(1, 0, 1, 0)
 ExecutorTextBox.Font = HeadFont
 ExecutorTextBox.ClearTextOnFocus = false
 ExecutorTextBox.Text = ""
@@ -473,10 +474,10 @@ PasteTextBoxUICorner.Parent = PasteTextBox
 
 SearchBox.Name = "SearchBox"
 SearchBox.Parent = MainFrame
-SearchBox.BackgroundTransparency = 1
-SearchBox.AnchorPoint = Vector2.new(0.5, 1)
+SearchBox.BackgroundTransparency = 0
+SearchBox.AnchorPoint = Vector2.new(0.5, 0)
 SearchBox.Position = UDim2.new(0.5, 0, 1, 0)
-SearchBox.Size = UDim2.new(0, 550, 0, 25)
+SearchBox.Size = UDim2.new(1, 0, 0, 25)
 SearchBox.ClearTextOnFocus = false
 SearchBox.Font = HeadFont
 SearchBox.PlaceholderText = "Search on scriptblox"
@@ -505,8 +506,8 @@ ScriptListFrame.Parent = MainFrame
 ScriptListFrame.Active = true
 ScriptListFrame.Transparency = 1
 ScriptListFrame.AnchorPoint = Vector2.new(0.5, 0)
-ScriptListFrame.Position = UDim2.new(0.501, 0, 0, 0)
-ScriptListFrame.Size = UDim2.new(0, 551, 0, 290)
+ScriptListFrame.Position = UDim2.new(0.5, 0, 0, 0)
+ScriptListFrame.Size = UDim2.new(1, 0, 1, 0)
 ScriptListFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ScriptListFrame.ScrollBarThickness = 0
 
@@ -522,7 +523,7 @@ Scripts.Parent = ScriptListFrame
 UIGridLayout.Parent = Scripts
 UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIGridLayout.CellPadding = UDim2.new(0, 0, 0, 5)
-UIGridLayout.CellSize = UDim2.new(0, 550, 0, 290)
+UIGridLayout.CellSize = UDim2.new(1, 0, 0.5, 0)
 
 ScriptFrame.Name = "ScriptFrame"
 ScriptFrame.Parent = Scripts
@@ -1160,10 +1161,10 @@ NoFavouritesText.Visible = false
 
 MainHomeFrame.Name = "MainHomeFrame"
 MainHomeFrame.Parent = TabsParent
-MainHomeFrame.AnchorPoint = Vector2.new(0.5, 0)
-MainHomeFrame.Transparency = 1
-MainHomeFrame.Position = UDim2.new(-164.5, 0, 0, 0)
-MainHomeFrame.Size = UDim2.new(0, 550, 0, 315)
+MainHomeFrame.AnchorPoint = Vector2.new(0.5, 1)
+MainHomeFrame.Transparency = 0
+MainHomeFrame.Position = UDim2.new(0.5, 0, 1, 0)
+MainHomeFrame.Size = UDim2.new(1, 0, 1, 0)
 
 HomeButtonsFrame.Name = "HomeButtonsFrame"
 HomeButtonsFrame.Parent = MainHomeFrame
@@ -2040,16 +2041,16 @@ File2 = readfile("Dynamic_Island/Editor.ECCS")
 ExecutorTextBox.Text = File2
 highlightSyntax(ExecutorTextBox.Text)
 if ExecutorTextBox.Text ~= "" then
-ExecutorTextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+ExecutorTextBox.TextTransparency = 1
 end
 
 ExecutorTextBox.Focused:connect(function()
-ExecutorTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecutorTextBox.TextTransparency = 0
 EditorTextHTMLColor.Visible = false
 end)
 
 ExecutorTextBox.FocusLost:connect(function()
-ExecutorTextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+ExecutorTextBox.TextTransparency = 1
 EditorTextHTMLColor.Visible = true
 end)
 
@@ -2688,27 +2689,27 @@ spawn(function()
 while task.wait() do
 if HomeTabValue == 1 then
 TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.07, 0),"InOut","Sine",0.2)
-TabsParent:TweenPosition(UDim2.new(3.5, 0, 0, 0),"InOut","Sine",0.2)
+TabsParent:TweenPosition(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://115233027273029"
 end
 if ExecutorTabValue == 1 then
 TabsLine:TweenPosition(UDim2.new(0.3, 0, 0.07, 0),"InOut","Sine",0.2)
-TabsParent:TweenPosition(UDim2.new(2, 0, 0, 0),"InOut","Sine",0.2)
+TabsParent:TweenPosition(UDim2.new(-0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://126959289346382"
 end
 if SearchTabValue == 1 then
 TabsLine:TweenPosition(UDim2.new(0.5, 0, 0.07, 0),"InOut","Sine",0.2)
-TabsParent:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.2)
+TabsParent:TweenPosition(UDim2.new(-1.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://78374630551970"
 end
 if FavouritesTabValue == 1 then
 TabsLine:TweenPosition(UDim2.new(0.7, 0, 0.07, 0),"InOut","Sine",0.2)
-TabsParent:TweenPosition(UDim2.new(-2, 0, 0, 0),"InOut","Sine",0.2)
+TabsParent:TweenPosition(UDim2.new(-2, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://97171588761867"
 end
 if SettingsTabValue == 1 then
 TabsLine:TweenPosition(UDim2.new(0.9, 0, 0.07, 0),"InOut","Sine",0.2)
-TabsParent:TweenPosition(UDim2.new(-3.5, 0, 0, 0),"InOut","Sine",0.2)
+TabsParent:TweenPosition(UDim2.new(-3.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://83910789656693"
 end
 end
