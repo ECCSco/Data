@@ -164,6 +164,7 @@ StarterGui = game:GetService("StarterGui")
 GestureControlValue = Instance.new("StringValue")
 TabImage = Instance.new("ImageLabel")
 EditorTextHTMLColor = Instance.new("TextLabel")
+OpenDIMobile = Instance.new("TextButton")
 
 local originalSettings = {
 Ambient = Light.Ambient,
@@ -250,6 +251,18 @@ DynamicIsland.AutoButtonColor = false
 DynamicIsland.TextXAlignment = Enum.TextXAlignment.Center
 DynamicIsland.TextYAlignment = Enum.TextYAlignment.Bottom
 DynamicIsland.BorderSizePixel = 0
+
+OpenDIMobile.Name = "OpenDIMobile"
+OpenDIMobile.Parent = DynamicIsland
+OpenDIMobile.Font = HeadFont
+OpenDIMobile.Text = ">"
+OpenDIMobile.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenDIMobile.TextSize = 25
+OpenDIMobile.Position = UDim2.new(1, 0, 0.5, 0)
+OpenDIMobile.BackgroundTransparency = 0
+OpenDIMobile.Size = UDim2.new(0, 30, 0, 30)
+OpenDIMobile.AnchorPoint = Vector2.new(0, 0.5)
+OpenDIMobile.Visible = false
 
 TabImage.Name = "TabImage"
 TabImage.Parent = DynamicIsland
@@ -2818,25 +2831,6 @@ performActionWhileHolding()
 end
 end)
 
-local function onKeyPress(input, gameProcessed)
-if gameProcessed then return end
-if input.KeyCode == Enum.KeyCode.RightControl then
-isHolding = true
-holdStartTime = tick()
-actionPerformed = false
-end
-end
-
-local function onKeyRelease(input, gameProcessed)
-if gameProcessed then return end
-if input.KeyCode == Enum.KeyCode.RightControl then
-if tick() - holdStartTime < actionTime then
-performActionIfReleasedEarly()
-end
-isHolding = false
-end
-end
-
 local function onInputBegan(input, gameProcessed)
 if gameProcessed then return end
 if input.UserInputType == Enum.UserInputType.Touch then
@@ -2885,7 +2879,17 @@ if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
 DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 end
 end
+if input.UserInputType == Enum.UserInputType.Touch and DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
+OpenDIMobile.Visible = true
+else
+OpenDIMobile.Visible = false
 end
+end
+
+OpenDIMobile.MouseButton1Click:connect(function()
+DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
+OpenDIMobile.Visible = false
+end)
 
 local function onInputEnded(input, gameProcessed)
 if gameProcessed then return end
@@ -2896,8 +2900,6 @@ end
 
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
-UserInputService.InputBegan:Connect(onKeyPress)
-UserInputService.InputEnded:Connect(onKeyRelease)
 
 page = 1
 gquery = ""
