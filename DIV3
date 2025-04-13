@@ -73,10 +73,6 @@ ClearTextBox = Instance.new("TextButton")
 ClearTextBoxUICorner = Instance.new("UICorner")
 SaveTextBox = Instance.new("TextButton")
 SaveTextBoxUICorner = Instance.new("UICorner")
-PostLine = Instance.new("Frame")
-PostLine_2 = Instance.new("Frame")
-PostLineUIGradient = Instance.new("UIGradient")
-PostLineUIGradient_2 = Instance.new("UIGradient")
 ScriptAuthor = Instance.new("TextLabel")
 ScriptAuthor_2 = Instance.new("TextLabel")
 CopyLinkButton = Instance.new("TextButton")
@@ -237,19 +233,19 @@ TabsFolder.Visible = false
 
 DynamicIsland.Name = "DynamicIsland"
 DynamicIsland.Parent = DI
-DynamicIsland.AnchorPoint = Vector2.new(0, 0.5)
-DynamicIsland.Size = UDim2.new(0, 30, 1, 0)
-DynamicIsland.Position = UDim2.new(0, 0, 0.5, 0)
+DynamicIsland.AnchorPoint = Vector2.new(0, 0)
+DynamicIsland.Size = UDim2.new(1, 0, 0, 30)
+DynamicIsland.Position = UDim2.new(0, 0, 0, 0)
 DynamicIsland.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 DynamicIsland.BackgroundTransparency = 0.7
 DynamicIsland.ZIndex = 2
-DynamicIsland.Text = os.date("%H\n—\n%M")
+DynamicIsland.Text = os.date("%H:%M").."  "
 DynamicIsland.Font = HeadFont
 DynamicIsland.TextSize = 22
 DynamicIsland.TextColor3 = Color3.fromRGB(255, 255, 255)
 DynamicIsland.AutoButtonColor = false
-DynamicIsland.TextXAlignment = Enum.TextXAlignment.Center
-DynamicIsland.TextYAlignment = Enum.TextYAlignment.Bottom
+DynamicIsland.TextXAlignment = Enum.TextXAlignment.Right
+DynamicIsland.TextYAlignment = Enum.TextYAlignment.Center
 DynamicIsland.BorderSizePixel = 0
 
 OpenDIMobile.Name = "OpenDIMobile"
@@ -274,10 +270,10 @@ TabImage.Image = "rbxassetid://115233027273029"
 TabsLine.Name = "TabsLine"
 TabsLine.Parent = DynamicIsland
 TabsLine.AnchorPoint = Vector2.new(0.5, 0)
-TabsLine.Size = UDim2.new(0, 30, 0, 5)
+TabsLine.Size = UDim2.new(0, 80, 0, 5)
 TabsLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
-TabsLineUICorner.CornerRadius = UDim.new(0, 10)
+TabsLineUICorner.CornerRadius = UDim.new(1, 0)
 TabsLineUICorner.Parent = TabsLine
 
 HomeTab.Name = "HomeTab"
@@ -359,7 +355,7 @@ TabsParent.Parent = TabsFolder
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = TabsParent
 MainFrame.AnchorPoint = Vector2.new(0.5, 0)
-MainFrame.Transparency = 0
+MainFrame.Transparency = 1
 MainFrame.Position = UDim2.new(2.5, 0, 0, 0)
 MainFrame.Size = UDim2.new(1, 0, 1, -25)
 
@@ -487,7 +483,7 @@ PasteTextBoxUICorner.Parent = PasteTextBox
 
 SearchBox.Name = "SearchBox"
 SearchBox.Parent = MainFrame
-SearchBox.BackgroundTransparency = 0
+SearchBox.BackgroundTransparency = 1
 SearchBox.AnchorPoint = Vector2.new(0.5, 0)
 SearchBox.Position = UDim2.new(0.5, 0, 1, 0)
 SearchBox.Size = UDim2.new(1, 0, 0, 25)
@@ -526,7 +522,7 @@ ScriptListFrame.ScrollBarThickness = 0
 
 UIPadding.Parent = ScriptListFrame
 UIPadding.PaddingBottom = UDim.new(0, 0)
-UIPadding.PaddingLeft = UDim.new(0, 0)
+UIPadding.PaddingLeft = UDim.new(0, 1.5)
 UIPadding.PaddingRight = UDim.new(0, 0)
 UIPadding.PaddingTop = UDim.new(0, 0)
 
@@ -535,33 +531,19 @@ Scripts.Parent = ScriptListFrame
 
 UIGridLayout.Parent = Scripts
 UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayout.CellPadding = UDim2.new(0, 0, 0, 5)
-UIGridLayout.CellSize = UDim2.new(1, 0, 0.5, 0)
+UIGridLayout.CellPadding = UDim2.new(0, 5, 0, 5)
+UIGridLayout.CellSize = UDim2.new(0, 315, 0, 220)
 
 ScriptFrame.Name = "ScriptFrame"
 ScriptFrame.Parent = Scripts
 ScriptFrame.Transparency = 1
-
-PostLine.Parent = ScriptFrame
-PostLine.Size = UDim2.new(1, 0, 0, 5)
-PostLine.Position = UDim2.new(0.5, 0, 1, 0)
-PostLine.AnchorPoint = Vector2.new(0.5, 0)
-PostLine.BorderSizePixel = 0
-PostLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-
-PostLineUIGradient.Color = ColorSequence.new{
-ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
-}
-PostLineUIGradient.Rotation = 85
-PostLineUIGradient.Parent = PostLine
 
 PreviewImage.Name = "PreviewImage"
 PreviewImage.Parent = ScriptFrame
 PreviewImage.BackgroundTransparency = 1
 PreviewImage.AnchorPoint = Vector2.new(0.5, 0.5)
 PreviewImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-PreviewImage.Size = UIGridLayout.CellSize
+PreviewImage.Size = UDim2.new(1, 0, 1, 0)
 PreviewImage.BorderSizePixel = 0
 
 ImageShadow.Name = "ImageShadow"
@@ -570,7 +552,7 @@ ImageShadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageShadow.BackgroundTransparency = 0.3
 ImageShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
-ImageShadow.Size = UIGridLayout.CellSize
+ImageShadow.Size = PreviewImage.Size
 ImageShadow.BorderSizePixel = 0
 
 ScriptTitle.Name = "ScriptTitle"
@@ -610,6 +592,7 @@ ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ExecuteButton.AutoButtonColor = false
 ExecuteButton.TextSize = 45
 ExecuteButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+ExecuteButton.Visible = false
 
 ExecuteButtonUICorner.CornerRadius = UDim.new(0, 10)
 ExecuteButtonUICorner.Parent = ExecuteButton
@@ -625,6 +608,7 @@ CopyScriptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CopyScriptButton.AutoButtonColor = false
 CopyScriptButton.TextSize = 45
 CopyScriptButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+CopyScriptButton.Visible = false
 
 CopyScriptButtonUICorner.CornerRadius = UDim.new(0, 10)
 CopyScriptButtonUICorner.Parent = CopyScriptButton
@@ -640,6 +624,7 @@ CopyLinkButton.Text = "Link"
 CopyLinkButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CopyLinkButton.TextSize = 45
 CopyLinkButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+CopyLinkButton.Visible = false
 
 CopyLinkButtonUICorner.CornerRadius = UDim.new(0, 10)
 CopyLinkButtonUICorner.Parent = CopyLinkButton
@@ -655,6 +640,7 @@ EditScript.Text = "Edit"
 EditScript.TextColor3 = Color3.fromRGB(255, 255, 255)
 EditScript.TextSize = 45
 EditScript.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+EditScript.Visible = false
 
 EditScriptUICorner.CornerRadius = UDim.new(0, 10)
 EditScriptUICorner.Parent = EditScript
@@ -742,26 +728,12 @@ VerifiedScriptFrame.Name = "VerifiedScriptFrame"
 VerifiedScriptFrame.Parent = Scripts
 VerifiedScriptFrame.Transparency = 1
 
-PostLine_2.Parent = VerifiedScriptFrame
-PostLine_2.Size = UDim2.new(1, 0, 0, 5)
-PostLine_2.Position = UDim2.new(0.5, 0, 1, 0)
-PostLine_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-PostLine_2.AnchorPoint = Vector2.new(0.5, 0)
-PostLine_2.BorderSizePixel = 0
-
-PostLineUIGradient_2.Color = ColorSequence.new{
-ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
-}
-PostLineUIGradient_2.Rotation = 85
-PostLineUIGradient_2.Parent = PostLine_2
-
 PreviewImage_2.Name = "PreviewImage"
 PreviewImage_2.Parent = VerifiedScriptFrame
 PreviewImage_2.BackgroundTransparency = 1
 PreviewImage_2.AnchorPoint = Vector2.new(0.5, 0.5)
 PreviewImage_2.Position = PreviewImage.Position
-PreviewImage_2.Size = UIGridLayout.CellSize
+PreviewImage_2.Size = UDim2.new(1, 0, 1, 0)
 PreviewImage_2.BorderSizePixel = 0
 
 ImageShadow_2.Name = "ImageShadow_2"
@@ -770,7 +742,7 @@ ImageShadow_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageShadow_2.BackgroundTransparency = 0.3
 ImageShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
-ImageShadow_2.Size = UIGridLayout.CellSize
+ImageShadow_2.Size = PreviewImage.Size
 ImageShadow_2.BorderSizePixel = 0
 
 ScriptTitle_2.Name = "ScriptTitle"
@@ -2661,7 +2633,7 @@ SearchBoxFavourites:GetPropertyChangedSignal("Text"):Connect(updateFavourites)
 
 spawn(function()
 while task.wait() do
-if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
+if DynamicIsland.Size == UDim2.new(1, 0, 1, 0) then
 TabsLine.Visible = true
 HomeTab.Visible = true
 ExecutorTab.Visible = true
@@ -2670,7 +2642,7 @@ FavouritesTab.Visible = true
 SettingsTab.Visible = true
 TabsFolder.Visible = true
 end
-if DynamicIsland.Size ~= UDim2.new(0.5, 0, 1, 0) then
+if DynamicIsland.Size ~= UDim2.new(1, 0, 1, 0) then
 TabsLine.Visible = false
 HomeTab.Visible = false
 ExecutorTab.Visible = false
@@ -2684,11 +2656,15 @@ end)
 
 spawn(function()
 while task.wait() do
-if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
+if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
 DynamicIsland.TextTransparency = 0
 TabImage.Visible = true
 end
-if DynamicIsland.Size ~= UDim2.new(0, 30, 1, 0) then
+if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
+DynamicIsland.TextTransparency = 1
+TabImage.Visible = true
+end
+if DynamicIsland.Size ~= UDim2.new(0, 30, 0, 30) and DynamicIsland.Size ~= UDim2.new(1, 0, 0, 30) then
 DynamicIsland.TextTransparency = 1
 TabImage.Visible = false
 end
@@ -2698,27 +2674,27 @@ end)
 spawn(function()
 while task.wait() do
 if HomeTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.06, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://115233027273029"
 end
 if ExecutorTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.3, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.26, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://126959289346382"
 end
 if SearchTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.5, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-1.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://78374630551970"
 end
 if FavouritesTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.7, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.7, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-2, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://97171588761867"
 end
 if SettingsTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.9, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.9, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-3.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://83910789656693"
 end
@@ -2767,10 +2743,10 @@ end)
 
 spawn(function()
 while task.wait() do
-if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
-DynamicIsland.Text = os.date("%H\n—\n%M")
+if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
+DynamicIsland.Text = os.date("%H:%M").."  "
 end
-if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
+if DynamicIsland.Size == UDim2.new(1, 0, 0, 0) then
 DynamicIsland.Text = ""
 end
 end
@@ -2779,11 +2755,11 @@ end)
 
 local function performActionWhileHolding()
 if not actionPerformed then
-if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(0, 0, 1, 0),"InOut","Sine",0.2)
+if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
+DynamicIsland:TweenSize(UDim2.new(0, 30, 0, 30),"InOut","Sine",0.2)
 else
-if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0),"InOut","Sine",0.2)
+if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
+DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30),"InOut","Sine",0.2)
 end
 end
 actionPerformed = true
@@ -2791,18 +2767,18 @@ end
 end
 
 local function performActionIfReleasedEarly()
-if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) or DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
+if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) or DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
+DynamicIsland:TweenSize(UDim2.new(1, 0, 1, 0),"InOut","Sine",0.2)
 end
 end
 
-DynamicIsland.MouseEnter:Connect(function()
+DynamicIsland.MouseButton1Down:Connect(function()
 isHolding = true
 holdStartTime = tick()
 actionPerformed = false
 end)
 
-DynamicIsland.MouseLeave:Connect(function()
+DynamicIsland.MouseButton1Up:Connect(function()
 if tick() - holdStartTime < actionTime then
 performActionIfReleasedEarly()
 end
@@ -2840,15 +2816,15 @@ return
 else
 local currentTime = tick()
 local currentPosition = input.Position
-if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) or DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
+if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) or DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
 if lastClickPosition and (currentTime - lastClickTime <= doubleClickTime) and (currentPosition - lastClickPosition).magnitude < 5 then
 if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
-DynamicIsland:TweenSize(UDim2.new(0.5, 0, 1, 0), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(1, 0, 1, 0), "InOut", "Sine", 0.2)
 end
 end
-elseif DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
+elseif DynamicIsland.Size == UDim2.new(1, 0, 1, 0) then
 if not isHolding then
-DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
 end
 end
 if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
@@ -2860,10 +2836,10 @@ isHolding = true
 spawn(function()
 wait(holdTime)
 if isHolding and (input.Position - lastClickPosition).magnitude < 1 then
-if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
+if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
+DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
 else
-DynamicIsland:TweenSize(UDim2.new(0, 0, 1, 0), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(0, 30, 0, 30), "InOut", "Sine", 0.2)
 end
 end
 end)
@@ -2875,11 +2851,11 @@ isHolding = false
 end
 end
 elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
+if DynamicIsland.Size == UDim2.new(1, 0, 1, 0) then
+DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
 end
 end
-if input.UserInputType == Enum.UserInputType.Touch and DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
+if input.UserInputType == Enum.UserInputType.Touch and DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
 OpenDIMobile.Visible = true
 else
 OpenDIMobile.Visible = false
@@ -2887,7 +2863,7 @@ end
 end
 
 OpenDIMobile.MouseButton1Click:connect(function()
-DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
 OpenDIMobile.Visible = false
 end)
 
@@ -3064,17 +3040,28 @@ end
 spawn(function()
 base_url = "https://scriptblox.com"
 image_url = v.image or (v.game and v.game.imageUrl)
-    
 if image_url then
 hash = string.format("%x", tick()):reverse():sub(1,6)
 clean_id = v._id:gsub("[^%w-]", "") .. "_" .. hash
-            
 if image_url:sub(1,1) == "/" then
 image_url = base_url..image_url
 end
-            
-cache_path = "Dynamic_Island/CacheImages/"..clean_id
-            
+cache_dir = "Dynamic_Island/CacheImages/"
+cache_path = cache_dir..clean_id
+spawn(function()
+while wait() do
+if isfolder(cache_dir) then
+local files = listfiles(cache_dir)
+for _, file in ipairs(files) do
+wait(1)
+delfile(file)
+end
+else
+makefolder(cache_dir)
+end
+end
+end)
+
 if not isfile(cache_path) then
 response = game:HttpGetAsync(image_url)
 ext = ({["\x89PNG"]=".png",["\xFF\xD8"]=".jpg",["GIF8"]=".gif",["RIFF"]=".webp"})[response:sub(1,4)] or ".png"
