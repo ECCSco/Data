@@ -233,19 +233,19 @@ TabsFolder.Visible = false
 
 DynamicIsland.Name = "DynamicIsland"
 DynamicIsland.Parent = DI
-DynamicIsland.AnchorPoint = Vector2.new(0, 0)
-DynamicIsland.Size = UDim2.new(1, 0, 0, 30)
-DynamicIsland.Position = UDim2.new(0, 0, 0, 0)
+DynamicIsland.AnchorPoint = Vector2.new(0, 0.5)
+DynamicIsland.Size = UDim2.new(0, 30, 1, 0)
+DynamicIsland.Position = UDim2.new(0, 0, 0.5, 0)
 DynamicIsland.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 DynamicIsland.BackgroundTransparency = 0.7
 DynamicIsland.ZIndex = 2
-DynamicIsland.Text = os.date("%H:%M").."  "
+DynamicIsland.Text = os.date("%H\n—\n%M")
 DynamicIsland.Font = HeadFont
 DynamicIsland.TextSize = 22
 DynamicIsland.TextColor3 = Color3.fromRGB(255, 255, 255)
 DynamicIsland.AutoButtonColor = false
-DynamicIsland.TextXAlignment = Enum.TextXAlignment.Right
-DynamicIsland.TextYAlignment = Enum.TextYAlignment.Center
+DynamicIsland.TextXAlignment = Enum.TextXAlignment.Center
+DynamicIsland.TextYAlignment = Enum.TextYAlignment.Bottom
 DynamicIsland.BorderSizePixel = 0
 
 OpenDIMobile.Name = "OpenDIMobile"
@@ -538,7 +538,7 @@ local paddingLeft = UIPadding.PaddingLeft.Offset
 local paddingRight = UIPadding.PaddingRight.Offset
 local totalHorizontalPadding = paddingLeft + paddingRight
 local availableWidth = ScriptListFrame.AbsoluteSize.X - totalHorizontalPadding
-local cellWidth = (availableWidth - (5 * 5)) / 6 
+local cellWidth = (availableWidth - (2 * 5)) / 3
 local cellHeight = cellWidth * (9/16)  
 UIGridLayout.CellSize = UDim2.new(0, cellWidth, 0, cellHeight)
 end
@@ -2642,7 +2642,7 @@ SearchBoxFavourites:GetPropertyChangedSignal("Text"):Connect(updateFavourites)
 
 spawn(function()
 while task.wait() do
-if DynamicIsland.Size == UDim2.new(1, 0, 1, 0) then
+if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
 TabsLine.Visible = true
 HomeTab.Visible = true
 ExecutorTab.Visible = true
@@ -2651,7 +2651,7 @@ FavouritesTab.Visible = true
 SettingsTab.Visible = true
 TabsFolder.Visible = true
 end
-if DynamicIsland.Size ~= UDim2.new(1, 0, 1, 0) then
+if DynamicIsland.Size ~= UDim2.new(0.5, 0, 1, 0) then
 TabsLine.Visible = false
 HomeTab.Visible = false
 ExecutorTab.Visible = false
@@ -2665,15 +2665,11 @@ end)
 
 spawn(function()
 while task.wait() do
-if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
+if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
 DynamicIsland.TextTransparency = 0
 TabImage.Visible = true
 end
-if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
-DynamicIsland.TextTransparency = 1
-TabImage.Visible = true
-end
-if DynamicIsland.Size ~= UDim2.new(0, 30, 0, 30) and DynamicIsland.Size ~= UDim2.new(1, 0, 0, 30) then
+if DynamicIsland.Size ~= UDim2.new(0, 30, 1, 0) then
 DynamicIsland.TextTransparency = 1
 TabImage.Visible = false
 end
@@ -2683,27 +2679,27 @@ end)
 spawn(function()
 while task.wait() do
 if HomeTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.06, 0, 0, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.07, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://115233027273029"
 end
 if ExecutorTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.26, 0, 0, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.3, 0, 0.07, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://126959289346382"
 end
 if SearchTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.5, 0, 0.07, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-1.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://78374630551970"
 end
 if FavouritesTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.7, 0, 0, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.7, 0, 0.07, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-2, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://97171588761867"
 end
 if SettingsTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.9, 0, 0, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.9, 0, 0.07, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-3.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://83910789656693"
 end
@@ -2752,10 +2748,10 @@ end)
 
 spawn(function()
 while task.wait() do
-if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
-DynamicIsland.Text = os.date("%H:%M").."  "
+if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
+DynamicIsland.Text = os.date("%H\n—\n%M")
 end
-if DynamicIsland.Size == UDim2.new(1, 0, 0, 0) then
+if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
 DynamicIsland.Text = ""
 end
 end
@@ -2764,11 +2760,11 @@ end)
 
 local function performActionWhileHolding()
 if not actionPerformed then
-if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
-DynamicIsland:TweenSize(UDim2.new(0, 30, 0, 30),"InOut","Sine",0.2)
+if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
+DynamicIsland:TweenSize(UDim2.new(0, 0, 1, 0),"InOut","Sine",0.2)
 else
-if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
-DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30),"InOut","Sine",0.2)
+if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
+DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0),"InOut","Sine",0.2)
 end
 end
 actionPerformed = true
@@ -2776,18 +2772,18 @@ end
 end
 
 local function performActionIfReleasedEarly()
-if DynamicIsland.Size == UDim2.new(1, 0, 0, 30) or DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
-DynamicIsland:TweenSize(UDim2.new(1, 0, 1, 0),"InOut","Sine",0.2)
+if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) or DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
+DynamicIsland:TweenSize(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
 end
 end
 
-DynamicIsland.MouseButton1Down:Connect(function()
+DynamicIsland.MouseEnter:Connect(function()
 isHolding = true
 holdStartTime = tick()
 actionPerformed = false
 end)
 
-DynamicIsland.MouseButton1Up:Connect(function()
+DynamicIsland.MouseLeave:Connect(function()
 if tick() - holdStartTime < actionTime then
 performActionIfReleasedEarly()
 end
@@ -2825,15 +2821,15 @@ return
 else
 local currentTime = tick()
 local currentPosition = input.Position
-if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) or DynamicIsland.Size == UDim2.new(1, 0, 0, 30) then
+if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) or DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
 if lastClickPosition and (currentTime - lastClickTime <= doubleClickTime) and (currentPosition - lastClickPosition).magnitude < 5 then
 if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
-DynamicIsland:TweenSize(UDim2.new(1, 0, 1, 0), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(0.5, 0, 1, 0), "InOut", "Sine", 0.2)
 end
 end
-elseif DynamicIsland.Size == UDim2.new(1, 0, 1, 0) then
+elseif DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
 if not isHolding then
-DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 end
 end
 if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
@@ -2845,10 +2841,10 @@ isHolding = true
 spawn(function()
 wait(holdTime)
 if isHolding and (input.Position - lastClickPosition).magnitude < 1 then
-if DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
-DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
+if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
+DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 else
-DynamicIsland:TweenSize(UDim2.new(0, 30, 0, 30), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(0, 0, 1, 0), "InOut", "Sine", 0.2)
 end
 end
 end)
@@ -2860,11 +2856,11 @@ isHolding = false
 end
 end
 elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-if DynamicIsland.Size == UDim2.new(1, 0, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
+if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
+DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 end
 end
-if input.UserInputType == Enum.UserInputType.Touch and DynamicIsland.Size == UDim2.new(0, 30, 0, 30) then
+if input.UserInputType == Enum.UserInputType.Touch and DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
 OpenDIMobile.Visible = true
 else
 OpenDIMobile.Visible = false
@@ -2872,7 +2868,7 @@ end
 end
 
 OpenDIMobile.MouseButton1Click:connect(function()
-DynamicIsland:TweenSize(UDim2.new(1, 0, 0, 30), "InOut", "Sine", 0.2)
+DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 OpenDIMobile.Visible = false
 end)
 
@@ -3055,28 +3051,17 @@ end
 spawn(function()
 base_url = "https://scriptblox.com"
 image_url = v.image or (v.game and v.game.imageUrl)
+    
 if image_url then
 hash = string.format("%x", tick()):reverse():sub(1,6)
 clean_id = v._id:gsub("[^%w-]", "") .. "_" .. hash
+            
 if image_url:sub(1,1) == "/" then
 image_url = base_url..image_url
 end
-cache_dir = "Dynamic_Island/CacheImages/"
-cache_path = cache_dir..clean_id
-spawn(function()
-while wait() do
-if isfolder(cache_dir) then
-local files = listfiles(cache_dir)
-for _, file in ipairs(files) do
-wait(1)
-delfile(file)
-end
-else
-makefolder(cache_dir)
-end
-end
-end)
-
+            
+cache_path = "Dynamic_Island/CacheImages/"..clean_id
+            
 if not isfile(cache_path) then
 response = game:HttpGetAsync(image_url)
 ext = ({["\x89PNG"]=".png",["\xFF\xD8"]=".jpg",["GIF8"]=".gif",["RIFF"]=".webp"})[response:sub(1,4)] or ".png"
