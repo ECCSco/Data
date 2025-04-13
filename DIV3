@@ -8,6 +8,7 @@ Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 TweenService = game:GetService("TweenService")
 DI = Instance.new("ScreenGui")
 DynamicIsland = Instance.new("TextButton")
+UIScale = Instance.new("UIScale")
 MainFrame = Instance.new("Frame")
 SearchBox = Instance.new("TextBox")
 ScriptListFrame = Instance.new("ScrollingFrame")
@@ -251,6 +252,11 @@ DynamicIsland.AutoButtonColor = false
 DynamicIsland.TextXAlignment = Enum.TextXAlignment.Center
 DynamicIsland.TextYAlignment = Enum.TextYAlignment.Bottom
 DynamicIsland.BorderSizePixel = 0
+
+UIScale.Parent = DynamicIsland
+workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+UIScale.Scale = math.clamp(workspace.CurrentCamera.ViewportSize.X/1920, 0.5, 1.2)
+end)
 
 OpenDIMobile.Name = "OpenDIMobile"
 OpenDIMobile.Parent = DynamicIsland
