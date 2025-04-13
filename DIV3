@@ -520,23 +520,32 @@ ScriptListFrame.Size = UDim2.new(1, 0, 1, 0)
 ScriptListFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ScriptListFrame.ScrollBarThickness = 0
 
-UIPadding.Parent = ScriptListFrame
-UIPadding.PaddingBottom = UDim.new(0, 0)
-UIPadding.PaddingLeft = UDim.new(0, 1.5)
-UIPadding.PaddingRight = UDim.new(0, 0)
-UIPadding.PaddingTop = UDim.new(0, 0)
-
 Scripts.Name = "Scripts"
 Scripts.Parent = ScriptListFrame
+
+UIPadding.Parent = ScriptListFrame
+UIPadding.PaddingBottom = UDim.new(0, 0)
+UIPadding.PaddingLeft = UDim.new(0, 2.5)
+UIPadding.PaddingRight = UDim.new(0, 0)
+UIPadding.PaddingTop = UDim.new(0, 0)
 
 UIGridLayout.Parent = Scripts
 UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIGridLayout.CellPadding = UDim2.new(0, 5, 0, 5)
-UIGridLayout.CellSize = UDim2.new(0, 315, 0, 220)
+
+local function updateCellSize()
+local paddingLeft = UIPadding.PaddingLeft.Offset
+local paddingRight = UIPadding.PaddingRight.Offset
+local totalHorizontalPadding = paddingLeft + paddingRight
+local availableWidth = ScriptListFrame.AbsoluteSize.X - totalHorizontalPadding
+local cellWidth = (availableWidth - (5 * 5)) / 6 
+local cellHeight = cellWidth * (9/16)  
+UIGridLayout.CellSize = UDim2.new(0, cellWidth, 0, cellHeight)
+end
 
 ScriptFrame.Name = "ScriptFrame"
 ScriptFrame.Parent = Scripts
-ScriptFrame.Transparency = 1
+ScriptFrame.BackgroundTransparency = 1
 
 PreviewImage.Name = "PreviewImage"
 PreviewImage.Parent = ScriptFrame
@@ -2876,6 +2885,12 @@ end
 
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
+
+spawn(function()
+while wait() do
+updateCellSize() 
+end
+end)
 
 page = 1
 gquery = ""
