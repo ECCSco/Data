@@ -532,7 +532,6 @@ UIPadding.PaddingTop = UDim.new(0, 0)
 UIGridLayout.Parent = Scripts
 UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIGridLayout.CellPadding = UDim2.new(0, 5, 0, 5)
-
 UIGridLayout.CellSize = UDim2.new(0, (workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 6.1, 0, ((workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 9) * (UIGridLayout.CellSize.Y.Offset / UIGridLayout.CellSize.X.Offset))
 workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 UIGridLayout.CellSize = UDim2.new(0, (workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 6.1, 0, ((workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 9) * (UIGridLayout.CellSize.Y.Offset / UIGridLayout.CellSize.X.Offset))
@@ -553,7 +552,7 @@ PreviewImage.BorderSizePixel = 0
 ImageShadow.Name = "ImageShadow"
 ImageShadow.Parent = PreviewImage
 ImageShadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageShadow.BackgroundTransparency = 0.3
+ImageShadow.BackgroundTransparency = 0.5
 ImageShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
 ImageShadow.Size = PreviewImage.Size
@@ -567,7 +566,7 @@ ScriptTitle.Size = UDim2.new(0, 330, 0, 100)
 ScriptTitle.Font = HeadFont
 ScriptTitle.Text = "Script Title"
 ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-ScriptTitle.TextSize = 40
+ScriptTitle.TextSize = 20
 ScriptTitle.TextWrapped = true
 ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
 ScriptTitle.TextYAlignment = Enum.TextYAlignment.Top
@@ -587,16 +586,15 @@ ScriptAuthor.TextYAlignment = Enum.TextYAlignment.Center
 
 ExecuteButton.Name = "ExecuteButton"
 ExecuteButton.Parent = ScriptFrame
-ExecuteButton.AnchorPoint = Vector2.new(0.5, 0.5)
-ExecuteButton.Position = UDim2.new(0.8, 0, 0.1, 0)
+ExecuteButton.AnchorPoint = Vector2.new(1, 1)
+ExecuteButton.Position = UDim2.new(1, -40, 1, -10)
 ExecuteButton.Size = UDim2.new(0, 210, 0, 40)
 ExecuteButton.Font = HeadFont
 ExecuteButton.Text = "Run"
 ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ExecuteButton.AutoButtonColor = false
-ExecuteButton.TextSize = 45
+ExecuteButton.TextSize = 30
 ExecuteButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-ExecuteButton.Visible = false
 
 ExecuteButtonUICorner.CornerRadius = UDim.new(0, 10)
 ExecuteButtonUICorner.Parent = ExecuteButton
@@ -703,14 +701,14 @@ InfoButtonUICorner.Parent = InfoButton
 
 ScriptGame.Name = "ScriptGame"
 ScriptGame.Parent = ScriptFrame
-ScriptGame.BackgroundTransparency = 1
+ScriptGame.BackgroundTransparency = 0
 ScriptGame.Position = UDim2.new(0, 0, 1, 0)
 ScriptGame.AnchorPoint = Vector2.new(0, 1)
 ScriptGame.Size = UDim2.new(0, 330, 0, 50)
 ScriptGame.Font = HeadFont
 ScriptGame.Text = "Game"
 ScriptGame.TextColor3 = Color3.fromRGB(255, 255, 255)
-ScriptGame.TextSize = 30
+ScriptGame.TextSize = 20
 ScriptGame.TextWrapped = true
 ScriptGame.TextXAlignment = Enum.TextXAlignment.Left
 ScriptGame.TextYAlignment = Enum.TextYAlignment.Bottom
@@ -743,7 +741,7 @@ PreviewImage_2.BorderSizePixel = 0
 ImageShadow_2.Name = "ImageShadow_2"
 ImageShadow_2.Parent = PreviewImage_2
 ImageShadow_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageShadow_2.BackgroundTransparency = 0.3
+ImageShadow_2.BackgroundTransparency = 0.5
 ImageShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
 ImageShadow_2.Size = PreviewImage.Size
@@ -757,7 +755,7 @@ ScriptTitle_2.Size = ScriptTitle.Size
 ScriptTitle_2.Font = HeadFont
 ScriptTitle_2.Text = "Script Title"
 ScriptTitle_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-ScriptTitle_2.TextSize = 40
+ScriptTitle_2.TextSize = 20
 ScriptTitle_2.TextWrapped = true
 ScriptTitle_2.TextXAlignment = Enum.TextXAlignment.Left
 ScriptTitle_2.TextYAlignment = Enum.TextYAlignment.Top
@@ -886,7 +884,7 @@ ScriptGame_2.Size = ScriptGame.Size
 ScriptGame_2.Font = HeadFont
 ScriptGame_2.Text = "Game"
 ScriptGame_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-ScriptGame_2.TextSize = 30
+ScriptGame_2.TextSize = 20
 ScriptGame_2.TextWrapped = true
 ScriptGame_2.TextXAlignment = Enum.TextXAlignment.Left
 ScriptGame_2.TextYAlignment = Enum.TextYAlignment.Bottom
@@ -3078,6 +3076,19 @@ end
 newScript.ExecuteButton.MouseButton1Click:Connect(function()
 loadstring(v.script)()
 end)
+
+newScript.ScriptTitle.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 6.1, 0, workspace.CurrentCamera.ViewportSize.X / 20)
+newScript.ScriptGame.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 10, 0, workspace.CurrentCamera.ViewportSize.X / 20)
+newScript.ExecuteButton.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 20, 0, workspace.CurrentCamera.ViewportSize.X / 50)
+
+workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+newScript.ScriptTitle.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 6.1, 0, workspace.CurrentCamera.ViewportSize.X / 20)
+newScript.ScriptGame.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 10, 0, workspace.CurrentCamera.ViewportSize.X / 20)
+newScript.ExecuteButton.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 20, 0, workspace.CurrentCamera.ViewportSize.X / 50)
+
+end)
+
+newScript.ScriptAuthor.Visible = false
 
 newScript.CopyScriptButton.MouseButton1Click:Connect(function()
 setclipboard(v.script)
