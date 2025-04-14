@@ -525,7 +525,7 @@ Scripts.Parent = ScriptListFrame
 
 UIPadding.Parent = ScriptListFrame
 UIPadding.PaddingBottom = UDim.new(0, 0)
-UIPadding.PaddingLeft = UDim.new(0, 2.5)
+UIPadding.PaddingLeft = UDim.new(0, 5)
 UIPadding.PaddingRight = UDim.new(0, 0)
 UIPadding.PaddingTop = UDim.new(0, 0)
 
@@ -533,15 +533,10 @@ UIGridLayout.Parent = Scripts
 UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIGridLayout.CellPadding = UDim2.new(0, 5, 0, 5)
 
-local function updateCellSize()
-local paddingLeft = UIPadding.PaddingLeft.Offset
-local paddingRight = UIPadding.PaddingRight.Offset
-local totalHorizontalPadding = paddingLeft + paddingRight
-local availableWidth = ScriptListFrame.AbsoluteSize.X - totalHorizontalPadding
-local cellWidth = (availableWidth - (2 * 5)) / 3
-local cellHeight = cellWidth * (9/16)  
-UIGridLayout.CellSize = UDim2.new(0, cellWidth, 0, cellHeight)
-end
+UIGridLayout.CellSize = UDim2.new(0, (workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 6.1, 0, ((workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 9) * (UIGridLayout.CellSize.Y.Offset / UIGridLayout.CellSize.X.Offset))
+workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+UIGridLayout.CellSize = UDim2.new(0, (workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 6.1, 0, ((workspace.CurrentCamera.ViewportSize.X - (3 * UIGridLayout.CellPadding.X.Offset)) / 9) * (UIGridLayout.CellSize.Y.Offset / UIGridLayout.CellSize.X.Offset))
+end)
 
 ScriptFrame.Name = "ScriptFrame"
 ScriptFrame.Parent = Scripts
@@ -2881,12 +2876,6 @@ end
 
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputEnded:Connect(onInputEnded)
-
-spawn(function()
-while wait() do
-updateCellSize() 
-end
-end)
 
 page = 1
 gquery = ""
