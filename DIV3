@@ -237,7 +237,7 @@ DynamicIsland.AnchorPoint = Vector2.new(0, 0.5)
 DynamicIsland.Size = UDim2.new(0, 30, 1, 0)
 DynamicIsland.Position = UDim2.new(0, 0, 0.5, 0)
 DynamicIsland.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-DynamicIsland.BackgroundTransparency = 0.7
+DynamicIsland.BackgroundTransparency = 0.3
 DynamicIsland.ZIndex = 2
 DynamicIsland.Text = os.date("%H\n—\n%M")
 DynamicIsland.Font = HeadFont
@@ -483,7 +483,7 @@ PasteTextBoxUICorner.Parent = PasteTextBox
 
 SearchBox.Name = "SearchBox"
 SearchBox.Parent = MainFrame
-SearchBox.BackgroundTransparency = 1
+SearchBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 SearchBox.AnchorPoint = Vector2.new(0.5, 0)
 SearchBox.Position = UDim2.new(0.5, 0, 1, 0)
 SearchBox.Size = UDim2.new(1, 0, 0, 25)
@@ -1372,7 +1372,7 @@ FpsLabel.TextSize = 40
 FpsLabelUICorner.CornerRadius = UDim.new(0, 10)
 FpsLabelUICorner.Parent = FpsLabel
 
-spawn(function()
+task.spawn(function()
 local function getRandomFact()
 local factresponse = HttpService:JSONDecode(game:HttpGetAsync("https://uselessfacts.jsph.pl/random.json?language=en")).text
 return factresponse
@@ -1380,7 +1380,7 @@ end
 
 FactsLabel.Text = "Did you know that?\n"..getRandomFact()
 
-spawn(function()
+task.spawn(function()
 while wait(20) do
 TweenService:Create(FactsLabel, TweenInfo.new(1), {TextTransparency = 1}):Play()
 wait(1.1)
@@ -1545,7 +1545,7 @@ GetRoot(plr).CFrame = CFrame.new((pos.X)+(vel.X)*(GetPing()*3.5),(pos.Y)+(vel.Y)
 end
 end
 
-spawn(function()
+task.spawn(function()
 PushFlingTool = Instance.new("Tool")
 PushFlingTool.Name = "PushFlingTool"
 PushFlingTool.RequiresHandle = false
@@ -1555,7 +1555,7 @@ PushFlingTool.Parent = plr.Backpack
 PushFlingTool:Remove()
 end)
 
-spawn(function()
+task.spawn(function()
 local function handleDeath()
 TweenService:Create(PushFlingButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
 
@@ -1802,8 +1802,8 @@ ToggleVoidProtection(true)
 end
 end)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 ExecutorTextBox.Size = UDim2.new(1, 0, 0, ExecutorTextBox.TextBounds.Y + 290)
 ScriptInfoTextLabel.Size = UDim2.new(1, 0, 0, ScriptInfoTextLabel.TextBounds.Y + 270)
 end
@@ -1824,8 +1824,8 @@ BanTextLabel.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X, 0, work
 BanTextLabel.BorderSizePixel = 0
 BanTextLabel.TextWrapped = true
 
-spawn(function()
-while wait() do
+task.spawn(function()
+while wait(5) do
 local DataScan = game:HttpGet("https://raw.githubusercontent.com/ECCSco/Data/refs/heads/main/Players")
 for scan in DataScan:gmatch("[^\n]+") do
 local id = scan:match("^(%d+)$")
@@ -1965,8 +1965,8 @@ isUpdating = false
 end
 end)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 EditorTextHTMLColor.Size = ExecutorTextBox.Size
 end
 end)
@@ -2084,8 +2084,8 @@ ScriptInfoScrollingFrame.Visible = false
 CloseScriptInfo.Visible = false
 end)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 local function isEmpty(table)
 return next(table) == nil
 end
@@ -2633,8 +2633,8 @@ updateFavourites()
 
 SearchBoxFavourites:GetPropertyChangedSignal("Text"):Connect(updateFavourites)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
 TabsLine.Visible = true
 HomeTab.Visible = true
@@ -2656,8 +2656,8 @@ end
 end
 end)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
 DynamicIsland.TextTransparency = 0
 TabImage.Visible = true
@@ -2669,8 +2669,8 @@ end
 end
 end)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 if HomeTabValue == 1 then
 TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.07, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
@@ -2739,8 +2739,8 @@ FavouritesTabValue = 0
 SettingsTabValue = 1
 end)
 
-spawn(function()
-while task.wait() do
+task.spawn(function()
+while wait() do
 if DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
 DynamicIsland.Text = os.date("%H\n—\n%M")
 end
@@ -2799,9 +2799,11 @@ isHolding = false
 end
 end)
 
-RunService.RenderStepped:Connect(function()
+task.spawn(function()
+while wait() do
 if isHolding and tick() - holdStartTime >= actionTime then
 performActionWhileHolding()
+end
 end
 end)
 
