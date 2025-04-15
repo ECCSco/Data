@@ -148,8 +148,6 @@ PaidScriptsButtonUICorner = Instance.new("UICorner")
 SettingsButtonsFrame = Instance.new("Frame")
 SettingsButtonsFrameUIGridLayout = Instance.new("UIGridLayout")
 NoScriptsFounded = Instance.new("TextLabel")
-GestureControlButton = Instance.new("TextButton")
-GestureControlButtonUICorner = Instance.new("UICorner")
 AntiLagButton = Instance.new("TextButton")
 AntiLagButtonUICorner = Instance.new("UICorner")
 FpsLabel = Instance.new("TextLabel")
@@ -157,10 +155,10 @@ FpsLabelUICorner = Instance.new("UICorner")
 RenderStepped = RunService.RenderStepped
 FactsLabel = Instance.new("TextLabel")
 StarterGui = game:GetService("StarterGui")
-GestureControlValue = Instance.new("StringValue")
 TabImage = Instance.new("ImageLabel")
 EditorTextHTMLColor = Instance.new("TextLabel")
 OpenDIMobile = Instance.new("TextButton")
+TabsHoldSound = Instance.new("Sound")
 
 local originalSettings = {
 Ambient = Light.Ambient,
@@ -187,13 +185,17 @@ local isHolding = false
 local holdStartTime
 local actionPerformed = false
 local FlingValueForPush
-local doubleClickTime = 0.3
 local holdTime = 0.5 
 local lastClickTime = 0 
 local lastClickPosition = nil 
 local holdStartTime = 0
 local OnTop = 9999999999999999999999999999999999999999999
-GestureControlValue.Value = "false"
+
+TabsHoldSound.Parent = game:GetService("SoundService")
+TabsHoldSound.Playing = true
+TabsHoldSound.Looped = false
+TabsHoldSound.Volume = 1
+TabsHoldSound:Stop()
 
 local function GetPing()
 return (game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())/1000
@@ -255,7 +257,7 @@ OpenDIMobile.Text = ">"
 OpenDIMobile.TextColor3 = Color3.fromRGB(255, 255, 255)
 OpenDIMobile.TextSize = 25
 OpenDIMobile.Position = UDim2.new(1, 0, 0.5, 0)
-OpenDIMobile.BackgroundTransparency = 0
+OpenDIMobile.BackgroundTransparency = 1
 OpenDIMobile.Size = UDim2.new(0, 30, 0, 30)
 OpenDIMobile.AnchorPoint = Vector2.new(0, 0.5)
 OpenDIMobile.Visible = false
@@ -1335,18 +1337,6 @@ PaidScriptsButton.TextSize = 35
 PaidScriptsButtonUICorner.CornerRadius = UDim.new(0, 10)
 PaidScriptsButtonUICorner.Parent = PaidScriptsButton
 
-GestureControlButton.Name = "GestureControlButton"
-GestureControlButton.Parent = SettingsButtonsFrame
-GestureControlButton.AutoButtonColor = false
-GestureControlButton.Font = HeadFont
-GestureControlButton.Text = "Gesture control (Mobile)"
-GestureControlButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GestureControlButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-GestureControlButton.TextSize = 30
-
-GestureControlButtonUICorner.CornerRadius = UDim.new(0, 10)
-GestureControlButtonUICorner.Parent = GestureControlButton
-
 AntiLagButton.Name = "AntiLagButton"
 AntiLagButton.Parent = SettingsButtonsFrame
 AntiLagButton.AutoButtonColor = false
@@ -1385,18 +1375,6 @@ FactsLabel.Text = "Did you know that?\n"..getRandomFact()
 TweenService:Create(FactsLabel, TweenInfo.new(1), {TextTransparency = 0}):Play()
 end
 end)
-end)
-
-GestureControlButton.MouseButton1Click:Connect(function()
-if GestureControlButton.BackgroundColor3 == Color3.fromRGB(255, 0, 0) then
-TweenService:Create(GestureControlButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(0, 255, 0)}):Play()
-writefile("Dynamic_Island/GestureControl.ECCS", "true")
-else
-if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
-TweenService:Create(GestureControlButton, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
-writefile("Dynamic_Island/GestureControl.ECCS", "false")
-end
-end
 end)
 
 AntiLagButton.MouseButton1Click:Connect(function()
@@ -2000,6 +1978,29 @@ if not isfolder("Dynamic_Island/Favourites") then
 createfolders("Dynamic_Island/Favourites")
 end
 
+if not isfolder("Dynamic_Island/Sounds") then
+createfolders("Dynamic_Island/Sounds")
+end
+
+task.spawn(function()
+if not isfile("Dynamic_Island/Sounds/TabsHold.wav") then
+local success, response = pcall(function()
+return
+game:HttpGet("https://dl.sndup.net/6vtgc/UIHover.wav")
+end)
+ 
+if success then
+Url = "https://dl.sndup.net/6vtgc/UIHover.wav"
+DataMatch = Url:match(".wav")
+MatchedUrl = "TabsHold"..DataMatch
+writefile("Dynamic_Island/Sounds/TabsHold.wav", response)
+TabsHoldSound.SoundId = getcustomasset("Dynamic_Island/Sounds/TabsHold.wav")
+end
+else
+TabsHoldSound.SoundId = getcustomasset("Dynamic_Island/Sounds/TabsHold.wav")
+end
+end)
+
 if not isfile("Dynamic_Island/History.ECCS") then
 writefile("Dynamic_Island/History.ECCS", "")
 end
@@ -2010,10 +2011,6 @@ end
 
 if not isfile("Dynamic_Island/Favourites/Favourites.ECCS") then
 writefile("Dynamic_Island/Favourites/Favourites.ECCS", "")
-end
-
-if not isfile("Dynamic_Island/GestureControl.ECCS") then
-writefile("Dynamic_Island/GestureControl.ECCS", GestureControlValue.Value)
 end
 
 File1 = readfile("Dynamic_Island/History.ECCS")
@@ -2036,13 +2033,6 @@ EditorTextHTMLColor.Visible = true
 end)
 
 File3 = readfile("Dynamic_Island/Favourites/Favourites.ECCS")
-
-File4 = readfile("Dynamic_Island/GestureControl.ECCS")
-GestureControlValue.Value = File4
-
-if GestureControlValue.Value == "true" then
-GestureControlButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-end
 
 for a in string.gmatch(File3, '([^Ⓓ]+)') do
 table.insert(Favourites, a:match("^%s*(.-)%s*$"))
@@ -2697,6 +2687,7 @@ end
 end)
 
 HomeTab.MouseEnter:Connect(function()
+TabsHoldSound:Play()
 HomeTabValue = 1
 ExecutorTabValue = 0
 SearchTabValue = 0
@@ -2705,6 +2696,7 @@ SettingsTabValue = 0
 end)
 
 ExecutorTab.MouseEnter:Connect(function()
+TabsHoldSound:Play()
 HomeTabValue = 0
 ExecutorTabValue = 1
 SearchTabValue = 0
@@ -2713,6 +2705,7 @@ SettingsTabValue = 0
 end)
 
 SearchTab.MouseEnter:Connect(function()
+TabsHoldSound:Play()
 HomeTabValue = 0
 ExecutorTabValue = 0
 SearchTabValue = 1
@@ -2721,6 +2714,7 @@ SettingsTabValue = 0
 end)
 
 FavouritesTab.MouseEnter:Connect(function()
+TabsHoldSound:Play()
 HomeTabValue = 0
 ExecutorTabValue = 0
 SearchTabValue = 0
@@ -2729,6 +2723,7 @@ SettingsTabValue = 0
 end)
 
 SettingsTab.MouseEnter:Connect(function()
+TabsHoldSound:Play()
 HomeTabValue = 0
 ExecutorTabValue = 0
 SearchTabValue = 0
@@ -2814,48 +2809,16 @@ else
 local currentTime = tick()
 local currentPosition = input.Position
 if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) or DynamicIsland.Size == UDim2.new(0, 30, 1, 0) then
-if lastClickPosition and (currentTime - lastClickTime <= doubleClickTime) and (currentPosition - lastClickPosition).magnitude < 5 then
-if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
-DynamicIsland:TweenSize(UDim2.new(0.5, 0, 1, 0), "InOut", "Sine", 0.2)
-end
-end
 elseif DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
 if not isHolding then
 DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 end
-end
-if GestureControlButton.BackgroundColor3 == Color3.fromRGB(0, 255, 0) then
-lastClickTime = currentTime
-lastClickPosition = currentPosition
-holdStartTime = currentTime
-isHolding = true
-
-spawn(function()
-wait(holdTime)
-if isHolding and (input.Position - lastClickPosition).magnitude < 1 then
-if DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
-DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
-else
-DynamicIsland:TweenSize(UDim2.new(0, 0, 1, 0), "InOut", "Sine", 0.2)
-end
-end
-end)
-elseif GestureControlButton.BackgroundColor3 == Color3.fromRGB(255, 0, 0) then
-lastClickTime = currentTime
-lastClickPosition = currentPosition
-holdStartTime = currentTime
-isHolding = false
 end
 end
 elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 if DynamicIsland.Size == UDim2.new(0.5, 0, 1, 0) then
 DynamicIsland:TweenSize(UDim2.new(0, 30, 1, 0), "InOut", "Sine", 0.2)
 end
-end
-if input.UserInputType == Enum.UserInputType.Touch and DynamicIsland.Size == UDim2.new(0, 0, 1, 0) then
-OpenDIMobile.Visible = true
-else
-OpenDIMobile.Visible = false
 end
 end
 
