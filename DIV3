@@ -2687,7 +2687,9 @@ end
 end)
 
 HomeTab.MouseEnter:Connect(function()
+if HomeTabValue ~= 1 then
 TabsHoldSound:Play()
+end
 HomeTabValue = 1
 ExecutorTabValue = 0
 SearchTabValue = 0
@@ -2696,7 +2698,9 @@ SettingsTabValue = 0
 end)
 
 ExecutorTab.MouseEnter:Connect(function()
+if ExecutorTabValue ~= 1 then
 TabsHoldSound:Play()
+end
 HomeTabValue = 0
 ExecutorTabValue = 1
 SearchTabValue = 0
@@ -2705,7 +2709,9 @@ SettingsTabValue = 0
 end)
 
 SearchTab.MouseEnter:Connect(function()
+if SearchTabValue ~= 1 then
 TabsHoldSound:Play()
+end
 HomeTabValue = 0
 ExecutorTabValue = 0
 SearchTabValue = 1
@@ -2714,7 +2720,9 @@ SettingsTabValue = 0
 end)
 
 FavouritesTab.MouseEnter:Connect(function()
+if FavouritesTabValue ~= 1 then
 TabsHoldSound:Play()
+end
 HomeTabValue = 0
 ExecutorTabValue = 0
 SearchTabValue = 0
@@ -2723,7 +2731,9 @@ SettingsTabValue = 0
 end)
 
 SettingsTab.MouseEnter:Connect(function()
+if SettingsTabValue ~= 1 then
 TabsHoldSound:Play()
+end
 HomeTabValue = 0
 ExecutorTabValue = 0
 SearchTabValue = 0
