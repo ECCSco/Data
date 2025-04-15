@@ -176,7 +176,7 @@ local History = {}
 local Favourites = {}
 local DynaData = {}
 local Ids = {}
-local HeadFont = Enum.Font.SourceSansBold
+local HeadFont = Enum.Font.SourceSans
 local HomeTabValue = 1
 local ExecutorTabValue = 0
 local SearchTabValue = 0
@@ -270,7 +270,7 @@ TabImage.Image = "rbxassetid://115233027273029"
 TabsLine.Name = "TabsLine"
 TabsLine.Parent = DynamicIsland
 TabsLine.AnchorPoint = Vector2.new(0.5, 0)
-TabsLine.Size = UDim2.new(0, 80, 0, 5)
+TabsLine.Size = UDim2.new(0, 80, 0, 2)
 TabsLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
 TabsLineUICorner.CornerRadius = UDim.new(1, 0)
@@ -362,7 +362,7 @@ MainFrame.Size = UDim2.new(1, 0, 1, -25)
 ExecutorMainFrame.Name = "ExecutorMainFrame"
 ExecutorMainFrame.Parent = TabsParent
 ExecutorMainFrame.AnchorPoint = Vector2.new(0.5, 1)
-ExecutorMainFrame.Transparency = 0
+ExecutorMainFrame.Transparency = 1
 ExecutorMainFrame.Position = UDim2.new(1.5, 0, 1, 0)
 ExecutorMainFrame.Size = UDim2.new(1, 0, 1, 0)
 
@@ -587,14 +587,14 @@ ScriptAuthor.TextYAlignment = Enum.TextYAlignment.Center
 ExecuteButton.Name = "ExecuteButton"
 ExecuteButton.Parent = ScriptFrame
 ExecuteButton.AnchorPoint = Vector2.new(1, 1)
-ExecuteButton.Position = UDim2.new(1, -40, 1, -10)
+ExecuteButton.Position = UDim2.new(1, -10, 1, -10)
 ExecuteButton.Size = UDim2.new(0, 210, 0, 40)
 ExecuteButton.Font = HeadFont
 ExecuteButton.Text = "Run"
 ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ExecuteButton.AutoButtonColor = false
-ExecuteButton.TextSize = 30
-ExecuteButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+ExecuteButton.TextSize = 25
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 
 ExecuteButtonUICorner.CornerRadius = UDim.new(0, 10)
 ExecuteButtonUICorner.Parent = ExecuteButton
@@ -610,7 +610,6 @@ CopyScriptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CopyScriptButton.AutoButtonColor = false
 CopyScriptButton.TextSize = 45
 CopyScriptButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-CopyScriptButton.Visible = false
 
 CopyScriptButtonUICorner.CornerRadius = UDim.new(0, 10)
 CopyScriptButtonUICorner.Parent = CopyScriptButton
@@ -626,7 +625,6 @@ CopyLinkButton.Text = "Link"
 CopyLinkButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CopyLinkButton.TextSize = 45
 CopyLinkButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-CopyLinkButton.Visible = false
 
 CopyLinkButtonUICorner.CornerRadius = UDim.new(0, 10)
 CopyLinkButtonUICorner.Parent = CopyLinkButton
@@ -642,7 +640,6 @@ EditScript.Text = "Edit"
 EditScript.TextColor3 = Color3.fromRGB(255, 255, 255)
 EditScript.TextSize = 45
 EditScript.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-EditScript.Visible = false
 
 EditScriptUICorner.CornerRadius = UDim.new(0, 10)
 EditScriptUICorner.Parent = EditScript
@@ -701,7 +698,7 @@ InfoButtonUICorner.Parent = InfoButton
 
 ScriptGame.Name = "ScriptGame"
 ScriptGame.Parent = ScriptFrame
-ScriptGame.BackgroundTransparency = 0
+ScriptGame.BackgroundTransparency = 1
 ScriptGame.Position = UDim2.new(0, 0, 1, 0)
 ScriptGame.AnchorPoint = Vector2.new(0, 1)
 ScriptGame.Size = UDim2.new(0, 330, 0, 50)
@@ -762,14 +759,14 @@ ScriptTitle_2.TextYAlignment = Enum.TextYAlignment.Top
 
 ExecuteButton_2.Name = "ExecuteButton"
 ExecuteButton_2.Parent = VerifiedScriptFrame
-ExecuteButton_2.AnchorPoint = Vector2.new(0.5, 0.5)
+ExecuteButton_2.AnchorPoint = ExecuteButton.AnchorPoint
 ExecuteButton_2.Position = ExecuteButton.Position
 ExecuteButton_2.Size = ExecuteButton.Size
 ExecuteButton_2.Font = HeadFont
-ExecuteButton_2.Text = "Execute"
+ExecuteButton_2.Text = "Run"
 ExecuteButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 ExecuteButton_2.AutoButtonColor = false
-ExecuteButton_2.TextSize = 45
+ExecuteButton_2.TextSize = ExecuteButton.TextSize
 ExecuteButton_2.BackgroundColor3 = ExecuteButton.BackgroundColor3
 
 ExecuteButtonUICorner_2.CornerRadius = UDim.new(0, 10)
@@ -2672,27 +2669,27 @@ end)
 task.spawn(function()
 while wait() do
 if HomeTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.1, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://115233027273029"
 end
 if ExecutorTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.3, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.3, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-0.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://126959289346382"
 end
 if SearchTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.5, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-1.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://78374630551970"
 end
 if FavouritesTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.7, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.7, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-2, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://97171588761867"
 end
 if SettingsTabValue == 1 then
-TabsLine:TweenPosition(UDim2.new(0.9, 0, 0.07, 0),"InOut","Sine",0.2)
+TabsLine:TweenPosition(UDim2.new(0.9, 0, 0, 0),"InOut","Sine",0.2)
 TabsParent:TweenPosition(UDim2.new(-3.5, 0, 1, 0),"InOut","Sine",0.2)
 TabImage.Image = "rbxassetid://83910789656693"
 end
@@ -3037,20 +3034,25 @@ newScript.ScriptGame.Text = v.game.name
 newScript.Parent = Scripts
 end
 
-spawn(function()
+task.spawn(function()
 base_url = "https://scriptblox.com"
 image_url = v.image or (v.game and v.game.imageUrl)
-    
 if image_url then
 hash = string.format("%x", tick()):reverse():sub(1,6)
 clean_id = v._id:gsub("[^%w-]", "") .. "_" .. hash
-            
 if image_url:sub(1,1) == "/" then
 image_url = base_url..image_url
+end   
+cache_dir = "Dynamic_Island/CacheImages/"
+cache_path = cache_dir..clean_id   
+if isfolder(cache_dir) then
+local files = listfiles(cache_dir)
+for _, file in ipairs(files) do
+delfile(file)
 end
-            
-cache_path = "Dynamic_Island/CacheImages/"..clean_id
-            
+else
+makefolder(cache_dir)
+end
 if not isfile(cache_path) then
 response = game:HttpGetAsync(image_url)
 ext = ({["\x89PNG"]=".png",["\xFF\xD8"]=".jpg",["GIF8"]=".gif",["RIFF"]=".webp"})[response:sub(1,4)] or ".png"
@@ -3081,16 +3083,20 @@ end)
 
 newScript.ScriptTitle.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 6.1, 0, workspace.CurrentCamera.ViewportSize.X / 20)
 newScript.ScriptGame.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 10, 0, workspace.CurrentCamera.ViewportSize.X / 20)
-newScript.ExecuteButton.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 20, 0, workspace.CurrentCamera.ViewportSize.X / 50)
+newScript.ExecuteButton.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 20, 0, workspace.CurrentCamera.ViewportSize.X / 60)
 
 workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 newScript.ScriptTitle.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 6.1, 0, workspace.CurrentCamera.ViewportSize.X / 20)
 newScript.ScriptGame.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 10, 0, workspace.CurrentCamera.ViewportSize.X / 20)
-newScript.ExecuteButton.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 20, 0, workspace.CurrentCamera.ViewportSize.X / 50)
+newScript.ExecuteButton.Size = UDim2.new(0, workspace.CurrentCamera.ViewportSize.X / 30, 0, workspace.CurrentCamera.ViewportSize.X / 60)
 
 end)
 
 newScript.ScriptAuthor.Visible = false
+newScript.ButtonsFrame.Visible = false
+newScript.EditScript.Visible = false
+newScript.CopyLinkButton.Visible = false
+newScript.CopyScriptButton.Visible = false
 
 newScript.CopyScriptButton.MouseButton1Click:Connect(function()
 setclipboard(v.script)
