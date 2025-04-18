@@ -38,7 +38,7 @@ KeySystem = Instance.new("ImageLabel")
 KeySystemUICorner = Instance.new("UICorner")
 KeySystem_2 = Instance.new("ImageLabel")
 KeySystemUICorner_2 = Instance.new("UICorner")
-InfoBox = Instance.new("Frame")
+InfoBox = Instance.new("ImageButton")
 ExecuteButton = Instance.new("TextButton")
 ExecuteButtonUICorner = Instance.new("UICorner")
 ExecuteButton_2 = Instance.new("TextButton")
@@ -495,6 +495,7 @@ SearchBox.TextSize = 30
 SearchBox.ZIndex = 5
 SearchBox.TextXAlignment = Enum.TextXAlignment.Center
 SearchBox.TextYAlignment = Enum.TextYAlignment.Center
+SearchBox.BorderSizePixel = 0
 
 NoScriptsFounded.Name = "NoScriptsFounded"
 NoScriptsFounded.Parent = MainFrame
@@ -944,16 +945,30 @@ InfoBox.Transparency = 0
 InfoBox.AnchorPoint = Vector2.new(0.5, 0)
 InfoBox.Position = UDim2.new(0.501, 0, 0, 0)
 InfoBox.Size = UDim2.new(1, 0, 1, 0)
-InfoBox.Transparency = 1
-InfoBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+InfoBox.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 InfoBox.BorderSizePixel = 0 
+InfoBox.Visible = false
+InfoBox.Transparency = 1
+InfoBox.AutoButtonColor = false
+
+Comments_2.Name = "Comments"
+Comments_2.Parent = InfoBox
+Comments_2.Active = true
+Comments_2.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Comments_2.AnchorPoint = Vector2.new(0.5, 1)
+Comments_2.Position = UDim2.new(0.5, 0, 1, 0)
+Comments_2.Size = UDim2.new(1, workspace.CurrentCamera.ViewportSize.X / 0, 0, workspace.CurrentCamera.ViewportSize.X / 10)
+Comments_2.CanvasSize = UDim2.new(0, 0, 0, 0)
+Comments_2.ScrollBarThickness = 0
+Comments_2.Visible = false
+Comments_2.BorderSizePixel = 0
 
 LoadingComments.Name = "LoadingComments"
 LoadingComments.Parent = InfoBox
 LoadingComments.BackgroundTransparency = 1
 LoadingComments.AnchorPoint = Vector2.new(0.5, 1)
 LoadingComments.Position = UDim2.new(0.5, 0, 1, 0)
-LoadingComments.Size = UDim2.new(0, 551, 0, 270)
+LoadingComments.Size = Comments_2.Size
 LoadingComments.Font = HeadFont
 LoadingComments.Text = "Loading content..."
 LoadingComments.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -971,24 +986,12 @@ CloseInfoBoxButton.Image = "rbxassetid://126487052147977"
 CloseInfoBoxButton.Visible = false
 CloseInfoBoxButton.BackgroundTransparency = 1
 
-Comments_2.Name = "Comments"
-Comments_2.Parent = InfoBox
-Comments_2.Active = true
-Comments_2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Comments_2.AnchorPoint = Vector2.new(0.5, 1)
-Comments_2.Position = UDim2.new(0.5, 0, 1, 0)
-Comments_2.Size = UDim2.new(0, 551, 0, 270)
-Comments_2.CanvasSize = UDim2.new(0, 0, 0, 0)
-Comments_2.ScrollBarThickness = 0
-Comments_2.Visible = false
-Comments_2.BorderSizePixel = 0
-
 NoCommentsText.Name = "NoCommentsText"
 NoCommentsText.Parent = InfoBox
 NoCommentsText.BackgroundTransparency = 1
 NoCommentsText.AnchorPoint = Vector2.new(0.5, 1)
 NoCommentsText.Position = UDim2.new(0.5, 0, 1, 0)
-NoCommentsText.Size = UDim2.new(0, 551, 0, 270)
+NoCommentsText.Size = Comments_2.Size
 NoCommentsText.Font = HeadFont
 NoCommentsText.Text = "No comments"
 NoCommentsText.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1000,21 +1003,22 @@ NoCommentsText.TextTransparency = 1
 CommentsUIGridLayout.Name = "CommentsUIGridLayout"
 CommentsUIGridLayout.Parent = Comments_2
 CommentsUIGridLayout.CellPadding = UDim2.new(0, 0, 0, 5)
-CommentsUIGridLayout.CellSize = UDim2.new(0, 551, 0, 300)
+CommentsUIGridLayout.CellSize = InfoBox.Size
 CommentsUIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 CommentsUIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 CommentsUIGridLayout.VerticalAlignment = Enum.VerticalAlignment.Top
 
 Comment.Name = "Comment"
 Comment.Parent = Comments_2
-Comment.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Comment.BackgroundColor3 = Color3.fromRGB(250, 250, 250)
 Comment.BorderSizePixel = 0 
 
 Content.Name = "Content"
 Content.Parent = Comment
 Content.BackgroundTransparency = 1
-Content.Position = UDim2.new(0, 0, 0, 50)
-Content.Size = UDim2.new(0, 551, 0, 250)
+Content.AnchorPoint = Vector2.new(0.5, 0.5)
+Content.Position = UDim2.new(0.5, 0, 0.5, 0)
+Content.Size = InfoBox.Size
 Content.Font = HeadFont
 Content.Text = "Comment"
 Content.TextScaled = true
@@ -2042,6 +2046,8 @@ TweenService:Create(InfoBox, TweenInfo.new(0.5), {Transparency = 1}):Play()
 TweenService:Create(NoCommentsText, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
 Comments_2.Visible = false
 CloseInfoBoxButton.Visible = false
+wait(0.5)
+InfoBox.Visible = false
 end)
 
 CloseScriptInfo.MouseButton1Click:Connect(function()
@@ -2916,7 +2922,7 @@ newComment.Parent = MainFrame.InfoBox.Comments
 newComment.Content.Text = v.text
 newComment.Author.Text = v.commentBy.username
 newComment.Author.CommentsLikes.Text = "♡ "..formatLikes(v.likeCount)
-if Content.Visible == true then
+if Content.Visible == true and v.totalPages ~= "0" then
 TweenService:Create(NoCommentsText, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
 end
 local function escapeHtml(text)
@@ -3069,6 +3075,7 @@ highlightSyntax(ExecutorTextBox.Text)
 end)
 
 newScript.ImageShadow.MouseButton1Click:Connect(function()
+InfoBox.Visible = true
 TweenService:Create(InfoBox, TweenInfo.new(0.5), {Transparency = 0}):Play()
 TweenService:Create(LoadingComments, TweenInfo.new(0.5), {TextTransparency = 0}):Play()
 updateInfoBox(v)
@@ -3171,8 +3178,12 @@ TweenService:Create(InfoBox, TweenInfo.new(0.5), {Transparency = 1}):Play()
 TweenService:Create(NoCommentsText, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
 Comments_2.Visible = false
 CloseInfoBoxButton.Visible = false
+task.spawn(function()
+wait(0.5)
+InfoBox.Visible = false
+end)
 spawn(function()
-for i = 1,10 do
+for i = 1,30 do
 HistoryFrameBackground.Visible = false
 end
 end)
@@ -3200,6 +3211,10 @@ TweenService:Create(InfoBox, TweenInfo.new(0.5), {Transparency = 1}):Play()
 TweenService:Create(NoCommentsText, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
 Comments_2.Visible = false
 CloseInfoBoxButton.Visible = false
+task.spawn(function()
+wait(0.5)
+InfoBox.Visible = false
+end)
 if SearchBox.Text ~= " " then
 local newText = SearchBox.Text
 local exists = false
