@@ -56,8 +56,8 @@ SettingsTab = Instance.new("TextButton")
 FavouritesTab = Instance.new("TextButton")
 TabsFolder = Instance.new("ScrollingFrame")
 TabsParent = Instance.new("Frame")
-ImageShadow = Instance.new("Frame")
-ImageShadow_2 = Instance.new("Frame")
+ImageShadow = Instance.new("ImageButton")
+ImageShadow_2 = Instance.new("ImageButton")
 HistoryFrameBackground = Instance.new("Frame")
 HistoryScrollingFrame = Instance.new("ScrollingFrame")
 ExecutorMainFrame = Instance.new("Frame")
@@ -88,10 +88,6 @@ AddFavouritesButton = Instance.new("ImageButton")
 AddFavouritesButtonUICorner = Instance.new("UICorner")
 AddFavouritesButton_2 = Instance.new("ImageButton")
 AddFavouritesButtonUICorner_2 = Instance.new("UICorner")
-CommentsButton = Instance.new("ImageButton")
-CommentsButtonUICorner = Instance.new("UICorner")
-CommentsButton_2 = Instance.new("ImageButton")
-CommentsButtonUICorner_2 = Instance.new("UICorner")
 InfoButton = Instance.new("ImageButton")
 InfoButtonUICorner = Instance.new("UICorner")
 InfoButton_2 = Instance.new("ImageButton")
@@ -552,13 +548,15 @@ PreviewImage.Size = UDim2.new(1, 0, 1, 0)
 PreviewImage.BorderSizePixel = 0
 
 ImageShadow.Name = "ImageShadow"
-ImageShadow.Parent = PreviewImage
+ImageShadow.Parent = ScriptFrame
 ImageShadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageShadow.BackgroundTransparency = 0.5
 ImageShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
 ImageShadow.Size = PreviewImage.Size
 ImageShadow.BorderSizePixel = 0
+ImageShadow.AutoButtonColor = false
+
 
 ScriptTitle.Name = "ScriptTitle"
 ScriptTitle.Parent = ScriptFrame
@@ -679,16 +677,6 @@ AddFavouritesButton.AutoButtonColor = false
 AddFavouritesButtonUICorner.CornerRadius = UDim.new(0, 10)
 AddFavouritesButtonUICorner.Parent = AddFavouritesButton
 
-CommentsButton.Name = "CommentsButton"
-CommentsButton.Parent = ButtonsFrame
-CommentsButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-CommentsButton.AnchorPoint = Vector2.new(0.5, 0.5)
-CommentsButton.Image = "rbxassetid://128641970972600"
-CommentsButton.AutoButtonColor = false
-
-CommentsButtonUICorner.CornerRadius = UDim.new(0, 10)
-CommentsButtonUICorner.Parent = CommentsButton
-
 InfoButton.Name = "InfoButton"
 InfoButton.Parent = ButtonsFrame
 InfoButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
@@ -720,7 +708,7 @@ PatchedScriptTextLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
 PatchedScriptTextLabel.Size = UDim2.new(1, 0, 1, 0)
 PatchedScriptTextLabel.Font = HeadFont
 PatchedScriptTextLabel.Text = "Patched"
-PatchedScriptTextLabel.TextSize = 100
+PatchedScriptTextLabel.TextScaled = true
 PatchedScriptTextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
 PatchedScriptTextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 PatchedScriptTextLabel.BorderSizePixel = 0
@@ -737,14 +725,15 @@ PreviewImage_2.Position = PreviewImage.Position
 PreviewImage_2.Size = UDim2.new(1, 0, 1, 0)
 PreviewImage_2.BorderSizePixel = 0
 
-ImageShadow_2.Name = "ImageShadow_2"
-ImageShadow_2.Parent = PreviewImage_2
+ImageShadow_2.Name = "ImageShadow"
+ImageShadow_2.Parent = VerifiedScriptFrame
 ImageShadow_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageShadow_2.BackgroundTransparency = 0.5
 ImageShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
 ImageShadow_2.Size = PreviewImage.Size
 ImageShadow_2.BorderSizePixel = 0
+ImageShadow_2.AutoButtonColor = false
 
 ScriptTitle_2.Name = "ScriptTitle"
 ScriptTitle_2.Parent = VerifiedScriptFrame
@@ -854,16 +843,6 @@ AddFavouritesButton_2.AutoButtonColor = false
 AddFavouritesButtonUICorner_2.CornerRadius = UDim.new(0, 10)
 AddFavouritesButtonUICorner_2.Parent = AddFavouritesButton_2
 
-CommentsButton_2.Name = "CommentsButton"
-CommentsButton_2.Parent = ButtonsFrame_2
-CommentsButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-CommentsButton_2.AnchorPoint = Vector2.new(0.5, 0.5)
-CommentsButton_2.Image = "rbxassetid://128641970972600"
-CommentsButton_2.AutoButtonColor = false
-
-CommentsButtonUICorner_2.CornerRadius = UDim.new(0, 10)
-CommentsButtonUICorner_2.Parent = CommentsButton_2
-
 InfoButton_2.Name = "InfoButton"
 InfoButton_2.Parent = ButtonsFrame_2
 InfoButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
@@ -909,7 +888,7 @@ PatchedScriptTextLabel_2.Position = UDim2.new(0.5, 0, 0.5, 0)
 PatchedScriptTextLabel_2.Size = UDim2.new(1, 0, 1, 0)
 PatchedScriptTextLabel_2.Font = HeadFont
 PatchedScriptTextLabel_2.Text = "Patched"
-PatchedScriptTextLabel_2.TextSize = 100
+PatchedScriptTextLabel_2.TextScaled = true
 PatchedScriptTextLabel_2.TextColor3 = Color3.fromRGB(255, 0, 0)
 PatchedScriptTextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 PatchedScriptTextLabel_2.BorderSizePixel = 0
@@ -964,9 +943,9 @@ InfoBox.Parent = MainFrame
 InfoBox.Transparency = 0
 InfoBox.AnchorPoint = Vector2.new(0.5, 0)
 InfoBox.Position = UDim2.new(0.501, 0, 0, 0)
-InfoBox.Size = UDim2.new(0, 551, 0, 290)
+InfoBox.Size = UDim2.new(1, 0, 1, 0)
 InfoBox.Transparency = 1
-InfoBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+InfoBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 InfoBox.BorderSizePixel = 0 
 
 LoadingComments.Name = "LoadingComments"
@@ -3089,7 +3068,7 @@ ExecutorTextBox.Text = game:HttpGet("https://rawscripts.net/raw/"..v.slug)
 highlightSyntax(ExecutorTextBox.Text)
 end)
 
-newScript.ButtonsFrame.CommentsButton.MouseButton1Click:Connect(function()
+newScript.ImageShadow.MouseButton1Click:Connect(function()
 TweenService:Create(InfoBox, TweenInfo.new(0.5), {Transparency = 0}):Play()
 TweenService:Create(LoadingComments, TweenInfo.new(0.5), {TextTransparency = 0}):Play()
 updateInfoBox(v)
